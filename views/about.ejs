@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="Doc4Doc - 文档的文档 - 介绍本站点的目的">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container">
+            <div class="row">
+                <article>
+                    <p><strong>Doc4Doc</strong>—— 文档的文档， 站点服务于程序猿。 u 是否已经厌倦了去官方网站去看参考手册 ？ 是否厌倦了花了 80% 的时间只看了 20% 的内容 ？好吧。 本站点的意图是， 用 20% 的时间看 80% 的文档。</p>
+
+                </article>
+            </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+    </body>
+</html>

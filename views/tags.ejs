@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="">
+        <meta name="author" content="@濠梁钓鱼">
+        
+        <% include pre-header.ejs %>
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container">
+            <div class="row">
+                <% if(typeof tags !==  'undefined' && tags != null){ %>
+                <% for(var i = 0; i < tags.length; ++i){ %>
+                    <a href="/tags/<%= tags[i].name %>" class="btn btn-link"><%= tags[i].name %></a>
+                <% }//for %>
+                <% }//if %>
+            </div><!-- row -->
+        </div> <!-- container -->
+        
+<script>
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+</script>
+    </body>
+</html>

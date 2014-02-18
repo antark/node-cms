@@ -1,0 +1,726 @@
+/*
+*   文件 ： main.css
+*   作者 ： 陆仁贾 http://ilovers.sinaapp.com 
+*   修改时间 ： 2014/01/11
+*/
+
+/************************************ 基本样式 basic ***********************************/
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: url(/images/blueprint-dark.png) repeat;
+  background-color: rgba(184, 172, 81, 0.1);
+  font-size: 12px;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+  text-shadow: #000 0px 0px 0px;
+}
+body, header, footer, article, h1, h2, h3, h4, h5, ol, ul, li, div, p, pre{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+body{
+}
+h1, h2, h3, h4, h5{
+  margin: 7px 0;
+}
+h2{
+  font-size: 1.1em;
+  margin: 2em 0 1em 0;
+  font-weight: bold;
+}
+h3{
+  margin: 0.9em 0;
+  font-size: 1em;
+}
+p{
+  text-indent: 2em;
+  margin: 0.4em 0;
+  font-size: 1.0em;
+  line-height: 2.3em;
+}
+footer p{
+  text-indent: 0;
+}
+.no_indent{
+  text-indent: 0;
+}
+
+.mark_first_letter:first-letter{
+  font-size: 1.7em;
+  text-transform: uppercase;
+}
+
+.img_xinshang{
+  border:1px solid #eee;
+  border-width: 0 0 0 1px;
+  margin-top: 3em;
+}
+.img_xinshang .btn-link{
+}
+.img_xinshang .btn-link.a_circle{
+}
+.img_xinshang img{
+  height: 100px;
+  border: 1px solid #eee;
+  width: 100px;
+}
+.upload_image .table td, .upload_image .table th{
+    text-align: center;
+    vertical-align:middle;
+}
+
+/************************************ 修改 bootstrap 样式 ***********************************/
+
+.col-md-offset-half{
+  margin-left: 4.167%;
+}
+/* 表格 table 部分 */
+.table{
+  margin: 1em 0;
+}
+.table caption{
+  margin: 10px 0;
+}
+.table th, .table td{
+  vertical-align: middle;
+  text-align: left;
+}
+.table.no_border td{
+  border-width: 0;
+}
+.table_color thead tr{
+  background-color: darkseagreen;
+}
+.table_color tbody tr:nth-child(odd){
+  background-color: honeydew;
+}
+.table_color tbody tr:nth-child(even){
+  background-color: lightyellow;
+}
+
+/* 表单 form 部分 */
+input[type="file"]{
+  line-height: 1.5em;
+  width: 200px;
+}
+input{
+  height: 2.2em;
+  border-radius: 2px;
+  border: 1px solid #aaa;
+  padding: 0 2px;
+}
+
+.panel{
+  margin-bottom: 0;
+  border-radius: 0;
+}
+.panel .panel-heading{
+  border-radius: 0;
+}
+.panel .panel-heading h3{
+  font-size: 1.0em;
+}
+.panel .btn{
+}
+#notes_list{
+  margin: 0;
+  position: relative;
+  top: 20px;
+  left: 0;
+}
+#notes_list li{
+  list-style: none;
+}
+.gallery #notes_list li{
+  border: 1px solid #eee;
+}
+.gallery #notes_list li:nth-child(odd){
+  transform: rotate(15deg);
+  -ms-transform: rotate(15deg); /* IE 9 */
+  -webkit-transform: rotate(15deg); /* Safari and Chrome */
+}
+
+.gallery #notes_list li:nth-child(even){
+  transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg); /* IE 9 */
+  -webkit-transform: rotate(-15deg); /* Safari and Chrome */
+}
+
+#notes_list img{
+  width: 150px;
+  border: 1px solid #bbb;
+  padding: 5px;
+}
+
+/************************************ 颜色 color ***********************************/
+
+.dark-grey {
+	color: #232527;
+}
+.light-grey{
+	color: #D2D2D2;
+}
+.red{
+	color: #F85D5D;
+}
+.blue{
+	color: #75D2D7;
+}
+.white{
+	color: #FFFFFF;
+}
+
+/**************** 主内容 main content 部分 *****************/
+body > header, body > footer, body > .container{
+}
+.container{
+  margin-bottom: 20px;
+}
+.container .row{
+}
+
+.main_container{
+  min-height: 500px;
+}
+.main_container ol, .main_container ul{
+  margin: 0.5em 0;
+}
+.main_container ol li, .main_container ul li{
+  margin-left: 1.5em;
+  line-height: 2em;
+}
+
+a:hover {
+	transition: color 0.35s;
+	text-decoration: none;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	vertical-align: middle;
+}
+
+.page_nav{
+  padding: 5px 0;
+  text-align: center;
+}
+.page_nav a{
+  padding: 0 5px;
+}
+.page_nav select{
+  border-radius: 1px;
+  font-size: 0.9em;
+  width: 150px;
+  height: 25px;
+  margin: 0 10px;
+}
+.post div.post{
+  margin: 20px 0;
+}
+.posts h3{
+  font-size: 1.3em;
+  margin: 10px 0;
+}
+.posts .btn{
+}
+.posts_more{
+  display: inline;
+  float: left;
+}
+.posts li hr{
+  margin: 5px 0;
+  border-color: #eee;
+}
+.posts #notes_list li{
+  border: 1px solid #eee;
+  border-width: 0 0 0 1px;
+  margin-left: 0;
+  padding-left: 1.5em;
+}
+.posts .posts_list li div{
+  display: inline-block;
+  margin-right: 8px;
+}
+.posts .posts_list li div:nth-child(3n+1){
+  width: 50%;
+}
+.posts .posts_list li div:nth-child(3n+2){
+  width: 20%;
+}
+.posts .posts_list li div:nth-child(3n){
+}
+.post_edit .tag{
+  height: 3em;
+}
+.tag span{
+  vertical-align: sub;
+  padding: 0 4px;
+}
+.tag div{
+  vertical-align: text-top;
+}
+.tag span{
+}
+.post_edit .tag div{
+  width: 30%;
+  display: inline-block;
+  background-color: white;
+  height: 2em;
+  border-radius: 2px;
+  padding: 1px 2px;
+}
+
+.post_edit input#input_tags .btn-link{
+  background-color: #666;
+}
+
+/**************** 文章页面 article *****************/
+.main_container article{
+  margin: 3% 0;
+}
+.article{
+  margin: 3% 0;
+}
+article p{
+  font-size: 1.1em;
+  line-height: 2.0em;
+  margin: 20px 0;
+}
+article p:first-child:first-letter{
+  font-size: 1.6em;
+  text-transform: uppercase;
+}
+
+.posts .posts_title{
+  margin: 5px 0;
+}
+.posts .posts_content{
+  margin: 15px 0;
+}
+.posts .posts_meta{
+  margin: 10px 0;
+}
+.posts h2{
+  font-size: 1.1em;
+  margin: 1.2em 0;
+  font-weight: bold;
+}
+.posts .posts_content ol, .posts .posts_content ul{
+  margin: 15px 0;
+}
+/**************** 上传文件 upload 部分 *****************/
+.upload_div input{
+  display: initial;
+}
+.upload_div .btn{
+  width: 30%;
+}
+.upload_div h3{
+  margin: 40px 0 15px 0;
+}
+/**************** gallery 部分 *****************/
+.gallery #notes_list img{
+}
+#img_body{
+  height: 335px;
+}
+#img_body{
+  text-align: center;
+}
+#img_body span{
+  line-height: 300px;
+}
+#img_body img{
+  max-height: 300px;
+}
+#img_footer{
+  text-align: left;
+  min-height: 60px;
+}
+
+.modal{
+}
+.modal-dialog{
+  padding-top: 45px;
+}
+.modal-controls{
+  padding-top: 15px;
+}
+.close{
+  color: white;
+}
+.modal-header button{
+  padding: 0 5px;
+}
+.modal-header h3{
+  font-size: 1.1em;
+}
+#img_modal .modal-dialog .modal-content{
+  background-color: rgba(5, 5, 5, 0.81);
+  color: white;
+}
+
+/**************** 地图导航 site-map  *****************/
+.btn-link{
+  font-size: 12px;
+}
+.btn-link:focus, .btn-link:hover{
+  text-decoration: none;
+}
+
+
+/******************** footer *******************/
+
+footer.footer_thanks a{
+  border-bottom: dotted 1px #999;
+}
+footer.footer_thanks a:hover{
+  border-bottom: solid 1px #666;
+}
+
+/******************** nav *******************/
+.nav-tabs{
+  border-width: 0;
+}
+.brand{
+}
+
+.nav_header > li > a:hover, .nav_headerbar .nav_header > li > a:focus {
+	background-color: initial;
+}
+.active > a, .active > a:hover, .active > a:focus{
+}
+.nav_header .dropdown-menu > li > a:hover, .nav_header .dropdown-menu > li > a:focus{
+}
+.dropdown-menu{
+  border: 0;
+}
+.nav_header > li{
+  vertical-align: middle;
+}
+.nav_header > li > a{
+  padding: 20px 10px 15px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #232527;
+  border: 0;
+  border-radius: 0;
+}
+.nav_header > li.first > a{
+  padding-left: 0;
+}
+.nav_header > li.first {
+}
+
+.nav_header .dropdown:hover a.dropdown-title {
+    color: #FFFFFF;
+}
+
+ul.nav_header li.dropdown:hover > ul.dropdown-menu{
+    display: block;
+}
+
+ul.nav_header li.dropdown:hover {
+    background: #232527;
+}
+
+.dropdown-menu{
+    padding: 0;
+    margin: 0;
+}
+
+.nav_header > li > .dropdown-menu:before {
+  display: none;
+}
+
+.nav_header > li > .dropdown-menu:after {
+  display: none;
+}
+
+a.nav_header_panel{    /* 导航面板图标 */
+  background-image: url('/images/google-image-01.png');
+  background-position: 105px 112px;
+}
+a.nav_header_panel:hover, a.nav_header_panel:focus{
+  /*background-position: 143px 77px;*/
+}
+.header_panel .popover{
+}
+
+.header_panel .popover ul{
+}
+
+.header_panel .popover.bottom{
+  left: -40px;
+  top: auto;
+  width: 280px;
+}
+.header_panel .popover.bottom .arrow{
+  left: 20%;
+}
+.header_panel ul.metro_card li{
+  list-style: none;
+  float: left;
+  padding: 12px 10px;
+}
+.header_panel ul.metro_card li a{
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+  text-align: center;
+}
+.header_panel ul.metro_card li a i{
+  padding: 10px;
+}
+.self_profile{
+  text-align: center;
+  margin-top: 20px;
+}
+.self_profile ul{
+  display: inline-block;
+}
+.nav_profile li a{
+  border: 0;
+}
+.nav_profile li.active a, .nav_profile li a{
+  border-width: 0 0 2px 0;
+  background: none;
+  color: #333;
+  margin: 0 8px;
+}
+.nav_profile > li > a:hover, .nav_profile > li > a:focus, .nav_profile li.active > a:hover, .nav_profile li.active > a:focus{
+  border: 2px solid blueviolet;
+  border-width: 0 0 2px 0;
+  background: none;
+  color: #999;
+}
+.nav_profile li.active a{
+  border-color: blueviolet;
+}
+
+
+/***************** profile ************/
+.user_prifile .row{
+  margin: 0 auto;
+}
+.user_profile .panel{
+  width: 40%;
+  margin: 15px;
+  float: left;
+}
+
+/***************** posts ************/
+.posts_title h3{
+  display: inline-block;
+  font-size: 1.1em;
+}
+.posts .posts_operation{
+  float: right;
+  padding-top: 20px;
+  visibility: hidden;
+}
+.posts .posts_operation button:hover, .posts .posts_operation button:focus, .img_xinshang button:hover, .img_xinshang button:focus{
+  text-decoration: none;
+  color: green;
+  font-weight: bold;
+  outline: none;
+}
+
+.metro{
+  float: left;
+  height: 130px;
+  width: 100px;
+  margin: 10px 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.metro .metro_img a{
+  width: 100%;
+}
+.metro .metro_img{
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+}
+.metro img{
+  width: 100%;
+}
+.metro .metro_info{
+  width: 100%;
+  padding: 5px 0;
+}
+/***************** scroll to top ************/
+.nav_page{
+    position:fixed;
+    bottom:20px;
+    right:25px;
+}
+.nav_page li{
+  list-style: none;
+  margin: 20px 0;
+}
+.nav_page li a{
+    border-radius: 15px;
+    padding: 3px;
+    text-align:center;
+    background: rgba(40,40,40,0.85);
+    font-weight: bold;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.nav_page li a:hover{
+    color: #000;
+}
+
+/*************** login/sign-up form *******************/
+body{
+  /*background: linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.0) 100%), url('/images/beauty/qing_ming_shang_he_tu_02.png') no-repeat fixed;*/
+}
+.main_container.login{
+}
+.login .form_div{
+  margin-top: 10px;
+  margin-right: 12%;
+  margin-left: 3%;
+  margin-right: 8%;
+}
+.sign-up .form_div{
+  margin-top: -15px;
+  margin-left: 3%;
+}
+
+.login .form-horizontal .controls, .sign-up .form-horizontal .controls{
+}
+
+.login .input-group, .login .form-group, .sign-up .input-group, .sign-up .form-group{
+  margin: 15px 0;
+}
+.login .form-group.submit, .sign-up .form-group.submit{
+  margin-top: 20px;
+}
+.login .submit .btn{
+  width: 60%;
+}
+
+.sign-up .submit .btn{
+  width: 30%;
+  margin-right: 15px;
+}
+.profile_form .btn{
+  width: 30%;
+}
+
+.login .submit .btn:focus{
+  outline: none;
+}
+.login .submit .btn:hover, .login .submit .btn:focus{
+}
+.main_container{
+  min-height: 400px;
+  margin-top: 40px;
+}
+
+#post_form #input_title{
+  width: 90%;
+}
+#post_form #input_summary{
+  width: 90%;
+}
+textarea{
+  font-size: 0.9em;
+  width: 80%;
+  height: 300px;
+}
+.posts_comments{
+  margin-top: 25px;
+}
+.posts_comments form{
+  margin: 15px 0;
+}
+.posts_comments h3{
+  font-size: 1em;
+}
+.posts_comments textarea{
+  height: 120px;
+  width: 60%;
+  font-size: 1.0em;
+}
+.form-horizontal .form-group {
+  margin-left: 0;
+}
+
+#post_form .submit .btn{
+  margin: 10px 40px 0 100px;
+}
+#post_form select{
+  padding: 3px;
+  width: 30%;
+  vertical-align: sub;
+}
+.main_container label{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 7px;
+  font-size: 12px;
+}
+.container.login .btn, .container.sign-up .btn{
+  font-size: 1em;
+}
+.container.login .submit, .container.sign-up .submit{
+  margin-left: 45px;
+}
+.container.sign-up .submit label{
+  padding-top: 12px;
+}
+
+.sign-up-tips{
+  padding: 0 5px;
+}
+
+form#logout{
+  text-align: center;
+}
+
+.random-page input{
+  font-size: 12px;
+}
+.random-page .btn{
+  margin: 0 8px;
+}
+.main_container input{
+  font-size: 12px;
+}
+.navbar-inner{
+  padding: 0;
+}
+
+#warn_message{
+  text-align: center;
+  color: red;
+  height: 30px;
+}
+
+.main_container .nav-tabs{
+  margin: 0;
+  margin-bottom: 30px;
+}
+
+.prettyprint{
+
+}
+.prettyprint ol.linenums{
+  padding-left: 3em;
+  border-left: 3px solid rgba(0, 83, 159, 0.65);
+  border-radius: 0;
+}
+/*************** footer *********************/
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+}

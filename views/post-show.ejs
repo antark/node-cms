@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container posts">
+            <div class="row article">
+            <% if(typeof post !==  'undefined' && post != null){ %>
+                    <div class="posts_title" 
+                    <% if(typeof user != 'undefined' && user && (user._id.toString() == post.user_id || user.name == 'admin' )){ %>
+                        onmousemove="$(this).children(':first-child').next().css('visibility', 'visible');return false;" 
+                        onmouseout="$(this).children(':first-child').next().css('visibility', 'hidden');return false;"
+                    <% } %>
+                    >
+                        <h3 class="mark_first_letter"><%= post.title %></h3>
+                        <div class="posts_operation">
+                            <a post_id="<%= post._id %>" class="btn btn-link  btn-xs post_delete"><i class="fa fa-trash-o fa-lg"></i></a>
+                            <a href="/post-edit?post_id=<%= post._id %>" target="_blank" class="btn btn-link btn-xs"><i class="fa fa-pencil fa-lg"></i></a>
+                        </div>
+                    <% 
+                        time = post.time;
+                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
+                        post_time = year + '/' + mon + '/' + day;
+                    %>
+                    
+                    </div>
+                    <div class="posts_content">
+                    <div class="posts_meta">由 <a href="<%= post.user_name ? '/+'+post.user_name : '#' %>"><%= post.user_name || '未知' %></a> 于 <%= post_time %> 时间写成</div>
+                        <p><%- post.content %></p>
+                    </div>
+                    
+                    <hr>
+                    <div class="posts_comments">
+                    <h2>评论：</h2>
+                    <% if(typeof post != 'undefined' && post && post.comments){
+                        for(var ii = 0; ii < post.comments.length; ++ii){ %>
+                        <h3><%= '# '+ii+' 楼：' + (post.comments[ii].user_name || '未知' ) %></h3><p><%= post.comments[ii].text %></p>
+                        <%}
+                    }%>
+                    <h2>发表评论：</h2>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <textarea id="comments"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-xs btn-success" id="commit_comments">确定</button>
+                        </div>
+                    </form>
+                    </div>
+            <% }else{//if %>
+                <p>你找的文章不存在 !</p>
+            <% } %>
+            </div>
+        </div>
+<script>
+    var post = <%- JSON.stringify(post) %>;
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+$(document).ready(function(){
+
+    $("#commit_comments").on("click", function(){
+        var comments = $("#comments").val();
+        $.post("/add/comments", {"post_id": post ? post._id : "", comments: comments}, function(msg){
+            alert(JSON.stringify(msg));
+        });
+    });
+
+    $(".post_delete").on("click", function(){
+        var post_id = $(this).attr("post_id");
+        var link = $(this);
+        $.post("/post-delete", {"post_id": post_id}, function(msg){
+            if(msg.error){
+                alert(msg.error.info);
+            }else{
+                // alert("删除成功! ");
+                window.location.href="/posts-all";
+            }
+        });
+    });
+});
+</script>
+    </body>
+</html>

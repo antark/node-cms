@@ -1,0 +1,10 @@
+
+h1{
+  text-align: center;
+}
+h1 a{
+  display: block;
+  height: 150px;
+  background: transparent url('/images/blueprint-dark.png') no-repeat;
+  text-align: center;
+}

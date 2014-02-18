@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="青瓷文化艺术站点所有注册的会员">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        <div class="container main-content">
+            <h2 class="mark_first_letter">用户列表</h2>
+            <p>本站目前注册人员有： <% if(typeof n_all != 'undefined' && n_all != null) {%><%= n_all %> <% } %> 位，
+            发文总数有 <% if(typeof n_posts != 'undefined' && n_posts != null) {%><%= n_posts %> <% } %> 篇</p>
+            
+            <table class="table table-bordered table-hover table_color">
+            <% if(typeof members !==  'undefined' && members != null){ %>
+            <caption>注册用户表</caption>
+            <thead>
+            <tr>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>密码</th>
+                <th>ID</th>
+                <th>注册时间</th>
+                <th>发文数</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <%
+            members.sort(function(a, b){    // 按 name 递增将 members 排序
+                if(!a.name) return 1;
+                if(!b.name) return -1;
+                return a.name > b.name;
+            });
+            %>
+            <% for(var i = 0; i < members.length; ++i){ 
+            %>
+                <tr>
+                    <td><a href="/+<%= members[i].name %>/"><%= members[i].name %></a></td>
+                    <td><%= members[i].mail %></td>
+                    <td><%= members[i].password %></td>
+                    <td><%= members[i]._id %></td>
+                    <td>
+                    <% if(members[i].reg_time){
+                        time = members[i].reg_time;
+                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
+                        user_reg_time = year + '/' + mon + '/' + day;
+                    }else{
+                        user_reg_time = '';
+                    }// if %>
+                    <%= user_reg_time %></td>
+                    <td><%= members[i].post_count %></td>
+                </tr>
+            <% }// for %>
+            <% } // if %>
+            </tbody>
+            </table>
+            
+            <!-- 分页导航 -->
+            <% 
+            if(typeof n_all != 'undefined' && typeof cur_page != 'undefined' && typeof n_per_page != 'undefined'){
+                next_page = cur_page + 1;    // 下一页
+                front_page = cur_page - 1;    // 上一页
+                last_page = Math.floor((n_all-1)/n_per_page + 1);    // 最后一页
+                
+                if(n_per_page*(next_page-1) >= n_all){    // 超过最后一页
+                    next_page = last_page;
+                }
+                if(front_page < 1){    // 超前第一页
+                    front_page = 1;
+                }
+            }%>
+            <div class="page_nav">
+                <a href="?#">首页</a>
+                <a href="?page=<% if(typeof front_page != 'undefined'){%><%= front_page %><%}%>">上一页</a>
+                <select id="page_select">
+                <% if(typeof last_page != 'undefined'){ %>
+                    <% for(var i = 1; i <= last_page; ++i){ %>
+                        <option <% if(typeof cur_page != 'undefined' && i == cur_page){%>selected<%}%> ><%= i %></option>
+                    <% } %>
+                <% } %>
+                </select>
+                <a href="?page=<% if(typeof next_page != 'undefined'){%><%= next_page %><%}%>">下一页</a>
+                <a href="?page=<% if(typeof last_page != 'undefined'){%><%= last_page %><%}%>">末页</a>
+            </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+$(document).ready(function(){
+    $("#page_select").change(function(){
+        var page = $("#page_select option:selected").text();
+        window.location.href = "?page="+page;
+    });
+});
+</script>
+    </body>
+</html>

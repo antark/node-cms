@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="学习文档 - 个人信息页 - 相册页">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container gallery">
+            <% if(typeof ntabs == 'undefined' || ntabs == false){ %>
+            <div class="row">
+                <a href="#"><img src="/images/beauty/qing_ming_shang_he_tu_01.png" width="100%" height="300"></a>
+            </div>
+            <div class="row self_profile">
+                <ul class="nav nav-tabs nav_profile">
+                    <li><a href="./profile">个人信息</a></li>
+                    <li><a href="./posts">帖子</a></li>
+                    <li class="active"><a href="#">相册</a></li>
+                    <li><a href="./file">文件</a></li>
+                </ul>
+            </div>
+            <% } %>
+            
+            <div class="row">
+            <ol id="notes_list" style="position:relative;min-height:150px;" class="gallery_modal">
+            <% if(typeof gallery !==  'undefined' && gallery != null){ %>
+            <% for(var i = 0; i < gallery.length; ++i){ %>
+                    <li><a class="btn btn-link"><img index="<%=i%>" src="/uploads/image/<%= gallery[i].name %>"></a></li>
+            <% }//for %>
+            <% }//if %>
+            </ol>
+            </div><!-- row -->
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="img_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="关闭"><i class="fa fa-times"></i></button>
+                <% if(typeof other !=  'undefined' && typeof user != 'undefined' && other && user && (other._id == user._id || user.name =='admin')){ %>
+                <button type="button" class="close" data-dismiss="" aria-hidden="true" title="保存" id="img_save"><i class="fa fa-save"></i></button>
+                <button type="button" class="close" data-dismiss="" aria-hidden="true" title="删除" id="img_delete"><i class="fa fa-trash-o"></i></button>
+                <% } %>
+                <h3 class="modal-title" id="img_label">图片名称 ： </h3>
+              </div>
+              <div class="modal-body" id="img_body"></div>
+              <div class="modal-controls" id="img_controls">
+                      <a class = "btn btn-link img_left"><i class="fa fa-arrow-left"></i></a>
+                      <a class = "btn btn-link img_right"><i class="fa fa-arrow-right"></i></a>
+                      <a class = "btn btn-link img_bigger"><i class="fa fa-search-plus"></i></a>
+                      <a class = "btn btn-link img_smaller"><i class="fa fa-search-minus"></i></a>
+              </div>
+              <div class="modal-footer" id="img_footer">图片介绍 ： 暂缺</div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
+<script>
+   var img_xinshang_gallery = <%- JSON.stringify(gallery) %>;
+    var img_xinshang_index = 0;
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+$(document).ready(function(){
+    wookmark_img();
+    
+    <% if(typeof other !=  'undefined' && typeof user != 'undefined' && other && user && (other._id == user._id || user.name =='admin')){ %>
+    // 允许编辑
+    $("#img_label").on("click", function(e){
+        if(e.currentTarget.contentEditable != null){
+            $(e.currentTarget).attr("contentEditable",true);
+        }
+    });
+    $("#img_footer").on("click", function(e){
+        if(e.currentTarget.contentEditable != null){
+            $(e.currentTarget).attr("contentEditable",true);
+        }
+    });
+    <% } %>
+    
+    $("#img_save").on("click", function(){
+        var img_id = $("#img_body img").attr("img_id");;
+        var info = {};
+        info.name = $("#img_label").text();
+        info.intro = $("#img_footer").text();
+        
+        $.post("/img-info-update", {'id' : img_id, 'info': info}, function(msg){
+            if(msg.error){
+                alert(msg.error.info);
+            }else{
+                alert("修改成功");
+            }
+        });
+    });
+    $("#img_delete").on("click", function(){
+        var img_id = $("#img_body img").attr("img_id");;
+        $.post("/img-delete", {'id' : img_id}, function(msg){
+            if(msg.error){
+                alert(msg.error.info);
+            }else{
+                alert("删除成功");
+            }
+        });
+    });
+    
+    other_user = <%if(typeof other != 'undefined'){%><%- JSON.stringify(other) %><%}%>;
+});
+$(window).load(function(){
+    wookmark_load();    // 动态加载 img
+});
+</script>
+    </body>
+</html>

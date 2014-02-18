@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="关于青瓷站点的由来">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include ../pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ../nav/header-nav.ejs %>
+        
+        <div class="container main_container">
+            <div class="row">
+                <div class="col-md-2">
+                    <ol>
+                        <li><a class="btn btn-link btn-xs data_collection">users</a></li>
+                        <li><a class="btn btn-link btn-xs data_collection">posts</a></li>
+                        <li><a class="btn btn-link btn-xs data_collection">images</a></li>
+                        <li><a class="btn btn-link btn-xs data_collection">docs</a></li>
+                    </ol>
+                </div>
+                <div class="col-md-8 col-md-offset-1">
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+        <% include ../footer.ejs %>
+        <% include ../post-footer.ejs %>
+    </body>
+<script>
+$(document).ready(function(){
+    $(".data_collection").on("click", function(){
+        var col = $(this).text();
+        var cols = ["users", "posts", "images", "docs"];
+        var ii = 0;
+        for(ii = 0; ii < cols.length; ++ii)
+            if(cols[ii] == col)
+                break;
+        if(ii >= col.length){
+            alert("集合名不存在 !");
+            return;
+        }
+        $.get("/get-one-page-of-collection?", function(msg){
+            alert(JSON.stringify(msg));
+        });
+    });
+});
+</script>
+</html>

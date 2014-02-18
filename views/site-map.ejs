@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="网站地图">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>Doc4Doc</strong>—— 文档的文档， 站点服务于程序猿。 u 是否已经厌倦了去官方网站去看参考手册 ？ 是否厌倦了花了 80% 的时间只看了 20% 的内容 ？好吧。 本站点的意图是， 用 20% 的时间看 80% 的文档。</p>
+                    <h2>本站导航</h2>
+                    <div class="nav_sitemap">
+                        <a href="/projects" class="btn btn-link">项目专栏</a>
+                        <a href="/tags" class="btn btn-link">标签栏目</a>
+                        <a href="#" class="btn btn-link">搜索一下</a>
+                        <a href="/member" class="btn btn-link">芸芸众生</a>
+                        <a href="/sign-up" class="btn btn-link">注册</a>
+                        <a href="/login" class="btn btn-link">登陆</a>
+                        <a href="/profile" class="btn btn-link">个人页面</a>
+                        <a href="/post-edit" class="btn btn-link">个人写作</a>
+                    </div>
+                    
+                    <h2>站外导航</h2>
+                    <div class="nav_sitemap">
+                        <a href="https://github.com/" class="btn btn-link">Github</a>
+                        <a href="http://sourceforge.net/" class="btn btn-link">Sourceforge</a>
+                    </div>
+                </div>
+            <% include ./nav/tupian_xinshang.ejs %>
+            </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+    </body>
+</html>

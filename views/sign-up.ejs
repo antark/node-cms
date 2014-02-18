@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="学习文档 - 注册成为会员吧， 参与讨论吧，帮助别人， 提升自己">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container sign-up main_container">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="/images/beauty/qing_ming_shang_he_tu_01.jpg" width="100%">
+                </div>
+                <div class="col-md-4 form_div">
+                    <form class="form-horizontal" method="POST" action="/reg" id="sign_up_form">
+                    
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                            <input class="form-control" type="email" id="input_mail" name="mail" placeholder="请输入正确格式的邮箱"  pattern="^\w+@[\w\d]+?\.[\w]{2,3}(\.[\w]{2,3})?$" tabindex="1" required autofocus>
+                        </div>
+                        
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input class="form-control" type="password" id="input_password" name="password"  placeholder="6 位以上的密码" required tabindex="2">
+                        </div>
+                        
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input class="form-control" type="password" id="input_password_2" name="password2"  placeholder="第二遍确认密码" required tabindex="3">
+                        </div>
+                        
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input class="form-control" type="text" id="input_name" name="name"  placeholder="输入一个 u 喜欢的昵称，必填" tabindex="4">
+                        </div>
+                        
+                        <div class="form-group submit">
+                            <button type="submit" class="btn btn-sm btn-success" tabindex="5">注册</button>
+                            <button type="reset" class="btn btn-sm btn-danger" tabindex="6">重置</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+
+// 显示错误信息
+function show_error_msg(msg)
+{
+    var anchor = "input_" + msg.type;
+    $("#"+anchor).popover({placement: "right",container: "body", content: msg.info});    // delay:{show:100, hide:1000}
+    $("#"+anchor).popover("show");
+    window.setTimeout(function() {
+        $("#"+anchor).popover("destroy");
+    }, 3000);
+}
+
+$(document).ready(function(){
+    $("#sign_up_form").submit(function(event){
+        event.preventDefault();    // 阻止默认(提交)操作
+        var mail = $("#input_mail").val().trim();
+        var pwd = $("#input_password").val().trim();
+        var pwd2 = $("#input_password_2").val().trim();
+        var name = $("#input_name").val().trim();
+        
+        if(mail == ""){
+            show_error_msg({type:"mail", info:"邮箱不能为空 ! "});
+            return;
+        }
+        var mail_pattern = /^\w+@[\w\d]+?\.[\w]{2,3}(\.[\w]{2,3})?$/;
+        if(!mail.match(mail_pattern)){
+            show_error_msg({type:"mail", info:"请输入正确的邮箱格式! "});
+            return;
+        }
+        if(pwd == ""){
+            show_error_msg({type:"password", info:"密码不能为空!"});
+            return;
+        }
+        if(pwd.length < 6){
+            show_error_msg({type:"password", info:"密码长度最低为 6 位 !"});
+            return;
+        }
+        if(pwd !== pwd2){
+            show_error_msg({type:"password_2", info:"两次密码不一样!"});
+            return;
+        }
+        if(name == ""){
+            show_error_msg({type:"name", info:"用户名不能为空!"});
+            return;
+        }
+        
+        $.post("/user-reg", {"mail": mail, "password": pwd, "name": name}, function(msg){
+            // alert(msg + " " + msg.error + " " + msg.object);
+            if(msg.error){
+                $("#input_password").val("");
+                show_error_msg(msg.error);
+            }else{
+                show_error_msg({type : "mail", info:"注册成功 !  1 秒后自动跳转到主页 !"});
+                window.setTimeout(function() {
+                    window.location.href = "/profile";
+                }, 1000);
+            }
+        });
+    });
+});
+</script>
+    </body>
+</html>

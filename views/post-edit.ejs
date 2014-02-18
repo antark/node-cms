@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        <link rel="stylesheet" href="/plugins/summernote/summernote.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        <div class="container main_container post_edit">
+        <div class="row">
+            <div class="col-md-8">
+            <form class="form-horizontal" method="POST" action="#" id="post_form">
+                <div class="form-group col-md-offset-2" class="for_warn_message">
+                    <label class="" id="warn_message">
+                        <% if(typeof user ==  'undefined' || user == null){ %>你还没有登录<% } %>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input_title">标题：</label>
+                    <input type="text" id="input_title" name="title" placeholder="写个什么标题好呢 ? " required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="input_summary">摘要：</label>
+                    <input type="text" id="input_summary" name="title" placeholder="写个简短的摘要， 两三句话就好." required>
+                </div>
+                <div class="form-group">
+                    <textarea id="input_content" name="content" placeholder="尽情地写..."></textarea>
+                </div>
+                <div class="form-group tag">
+                    <label class="control-label" for="input_project">项目：</label>
+                    <select id="input_project">
+                        <option>nodejs</option><option>golang</option><option>python</option>
+                        <option>c</option><option>c++</option><option value="c-sharp">c#</option>
+                        <option>objective-c</option><option>java</option>
+                    </select>
+                </div>
+                <div class="form-group tag">
+                    <label class="control-label" for="input_tags">标签：</label>
+                    <div contenteditable="true" id="input_tags" name="tags"><span>javascript</span></div>
+                </div>
+                
+                <div class="form-group submit">
+                    <div class="controls submit">
+                        <button type="submit" class="btn btn-xs btn-success">保存</button>
+                        <button type="reset" class="btn btn-xs btn-danger">重写</button>
+                    </div>
+                </div>
+            </form>
+            </div><!-- -->
+            <% include ./nav/tupian_xinshang.ejs %>
+        </div><!-- row -->
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+        <script type="text/javascript" src="/plugins/summernote/summernote.js"></script>
+<script>
+// ---------------------------------------------------------------------------------------------------------
+var post = {};    // 全局 post 对象
+
+<% if(typeof post !==  'undefined' && post !== null && !(typeof no_post != 'undefined' && no_post)){ %>
+post = <%- JSON.stringify(post) %>;
+$(document).ready(function(){
+    $("#input_title").val(post.title);
+    $("#input_summary").val(post.summary);
+    $("#input_content").val(post.content);
+    $("#input_project").val(post.project);
+    $("#input_tags span").text(post.tags.join(" "));
+});
+
+<% } %>
+
+// ---------------------------------------------------------------------------------------------------------
+$(document).ready(function(){
+    $("#post_form").submit(function(event){
+        event.preventDefault();    // 阻止默认(提交)操作
+        var title = $("#input_title").val().trim();
+        var summary = $("#input_summary").val().trim();
+        var content = $("#input_content").code().trim();
+        var input_pro = $("#input_project").val();
+        var input_tags = $("#input_tags span").text();
+        
+        var tags = input_tags.split(" ");
+        // alert(input_pro + "\n" + tags);
+        
+        if(content.match(/(<script>)|(<\/script>)/)){
+            alert("内容中包括脚本代码");
+            return;
+        }
+        if(title == ""){
+            $("#warn_message").text("标题不能为空!");
+            return;
+        }
+        post.title = title;
+        post.summary = summary;
+        post.content = content;
+        post.project = input_pro;
+        post.tags = tags;
+        
+        
+        $.post("/post-save", {"post": post}, function(msg){
+            if(msg.error){
+                $("#warn_message").text(msg.error.info);
+            }else{
+                $("#warn_message").text("保存成功...");
+                post = msg.object;
+            }
+        });
+    });
+    
+    $("#input_content").summernote({height: 350 /*($(window).height() - 250)*/, codemirror: {
+        theme: 'monokai'},
+        oninit: function(){}
+    });
+    
+});
+</script>
+    </body>
+</html>

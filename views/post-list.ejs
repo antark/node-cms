@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container posts">
+            <div class="row">
+            <div class="col-md-8 posts_list">
+            <ol>
+            <% if(typeof posts !==  'undefined' && posts != null){ %>
+            <% for(var i = 0; i < posts.length; ++i){ %>
+                    <li>
+                    <div class="posts_title"><h3 title="<%- posts[i].summary %>"><a href="/post-show/id/<%= posts[i]._id %>"><%= posts[i].title %></a></h3></div>
+                    <% 
+                        time = posts[i].time;
+                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
+                        post_time = year + '/' + mon + '/' + day;
+                    %>
+                    <div><a href="<%= posts[i].user_name ? '/+'+posts[i].user_name : '#' %>"><%= posts[i].user_name || '未知' %></a></div>
+                    <div><%= post_time %></div>
+                    </li>
+            <% }//for %>
+            <% }//if %>
+            </ol>
+            </div>
+            <% include ./nav/tupian_xinshang.ejs %>
+            </div><!-- row -->
+        </div>
+<script>
+    var posts = <%- typeof posts == 'undefined' ? 'null' : JSON.stringify(posts) %>;
+    var user = <%- typeof user == 'undefined' ? 'null' : JSON.stringify(user) %>;
+    var other_user = <%- typeof other == 'undefined' ? 'null' : JSON.stringify(other) %>;
+    var cat = '<%= typeof tag == 'undefined' ? '' : tag %>';
+    var project = '<%= typeof project == 'undefined' ? '' : project %>';
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+$(document).ready(function(){
+    $(".post_delete").on("click", function(){
+        var post_id = $(this).attr("post_id");
+        // alert(post_id);
+        var link = $(this);
+        $.post("/post-delete", {"post_id": post_id}, function(msg){
+            if(msg.error){
+                alert(msg.error.info);
+            }else{
+                // alert("删除成功! ");
+                link.parents("#notes_list li").remove();
+            }
+        });
+    });
+    post_finished = false;
+    post_loading = false;
+    $(document).bind("scroll", function(event){
+        var closeToBottom = ($(window).scrollTop() + $(window).height() > $(document).height() - 100);
+        if(closeToBottom && !post_finished && !post_loading){
+            post_loading = true;
+            $.get("/get-one-page-of-posts?nskip="+(posts.length)+"&n=4&cat="+cat+"&project="+encodeURIComponent(project)+
+                "&user_id="+(typeof other_user != 'undefined' && other_user ? other_user._id : ''), function(msg){
+                if(msg.error){
+                    return;
+                }
+                var another = msg.objects;
+                if(another.length == 0){
+                    post_finished = true;
+                    return;
+                }
+                for(ii = 0; ii < another.length; ii++){
+                    var post_time = new Date(another[ii].time);
+                    var year = post_time.getFullYear(); mon = post_time.getMonth()+1; day = post_time.getDate();
+                    var show_time = year + '/' + mon + '/' + day;
+                    $(".posts_list ol").append('<li><div class="posts_title"><h3 title="'+another[ii].summary+'"><a href="/post-show?post_id='+another[ii]._id+'">'+
+                        another[ii].title+'</a></h3>'+
+                        '</div> <div><a href="'+(another[ii].user_name ? "/+"+another[ii].user_name+"/" : "#")+'">'+ (another[ii].user_name || "未知") +'</a></div> <div>'+show_time+'</div></li>');
+                    posts.push(another[ii]);
+                }
+                post_loading = false;
+            });
+        }
+    });
+});
+</script>
+    </body>
+</html>

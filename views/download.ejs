@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="上传和下载资料代码等">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container">
+            <h2>资料下载</h2>
+            <table class="table table-bordered table-hover">
+            <caption>资料下载</caption>
+            <thead>
+            <tr>
+                <th>文件名</th>
+                <th>用户</th>
+                <th>时间</th>
+                <th>大小(KB)</th>
+            </tr>
+            <thead>
+            <tbody>
+            <% if(typeof files !== 'undefined' && files != null){ %>
+            <% for(var i = 0;  i < files.length; ++i){ 
+                if(files[i].is_directory) continue;
+            %>
+                <tr>
+                    <td><a href="/uploads/image/<%=files[i].name%>" download><%= files[i].name %></a></td>
+                    <td><%= files[i].user || '---' %></td>
+                    <td>
+                    <% if(files[i].create_time){
+                        time = files[i].create_time
+                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
+                        file_upload_time = year + '/' + mon + '/' + day;
+                    }else{
+                        file_upload_time = '';
+                    }// if %>
+                    <%= file_upload_time %>
+                    </td>
+                    <td><%= (files[i].size/1024).toFixed(3) %></td>
+                </tr>
+            <% } %>
+            <% } %>
+            </tbody>
+            </table>
+            <script>
+            </script>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="">
+        <meta name="author" content="@濠梁钓鱼">
+        
+        <% include pre-header.ejs %>
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>程序猿</h2>
+                    <p>为什么程序猿那么苦逼 ? 为什么要学的东西那么多 ? 为什么学东西又那么慢 ? 为什么官方的文档不是看不懂就是跟参考手册或是字典似的 ? 为什么我花了那么长时间却学了那么一点点东西 ! 其实最好的方法就是有个 big brother 来带 me 们，或是阅读“有用”的文档。 这里不强调“完整”， 而强调“有用”， 窃以为 me 们完全可以用 20% 的时间学习 80% 的东西， 而非反过来。</p>
+                    <h2>宗旨</h2>
+                    <p>me 们应该敬畏生命，因为每个生命都有始有终。me 希望这里的写作， 都是汗水和智慧的结晶， 可以重复、可以翻译，不可以 ctrl+c 。下面是文档写作的几个基本原则：</p>
+                    <ol>
+                        <li>实用 ： 分享的东西要实用，而非非夸夸其谈；</li>
+                        <li>正确 ： 发布错误的文档几乎没有意义；</li>
+                        <li>美观 ： 不整齐、美观的东西影响阅读者的心情；</li>
+                    </ol>
+                    <p>饮水思源， 如果这里曾经帮助过 u ， 请对那些曾经帮助过 u 的人抱有一颗感恩的心， 并在适当的时候可以帮助 others 。</p>
+                    <h2>组织</h2>
+                    <p>其实这里的组织很简单， 站点以项目为主要划分， 包含众多小标签。</p>
+                    <ol>
+                        <li><a href="/projects">项目</a> ： 以项目作为文档划分大类，比如 <a href="/projects/nodejs">nodejs</a>、<a href="/projects/nodejs">golang</a>， 可以是总结性文档，或重要文档的翻译， 可以是其他对程序猿有用的；</li>
+                        <li><a href="/tags">标签</a> ： 以标签细分和交叉划分文档，比如 <a href="/tags/javascript">JavaScript</a>、<a href="/tags/mongodb">mongodb</a> ；</li>
+                        <li><a href="#">工具</a> ： 本站点提供若干实用工具给程序猿；</li>
+                    </ol>
+                </div>
+            <% include ./nav/tupian_xinshang.ejs %>
+            </div><!-- row -->
+        </div> <!-- container -->
+        
+<script>
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+</script>
+    </body>
+</html>

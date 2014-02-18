@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>青瓷文化艺术 - 搜索页面</title>
+
+        <meta name="description" content="搜索青瓷文化艺术站点的内容">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/search.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container">
+            <h1><a href="/posts-all"></a></h1>
+          <div>
+            <a href="/post" title="A paginated list of every post">Posts</a>
+            <a href="/comment" title="A paginated list of every comment">Comments</a>
+            <a href="/tag" title="A paginated list of every tag">Tags</a>
+            <a href="/wiki" title="Wiki">Wiki</a>
+            <a href="/static/more" title="static_more">»</a>
+          </div>
+          <div>
+            <form accept-charset="UTF-8" action="#" method="get"><div style="margin:0;padding:0;display:inline"></div>
+              <div>
+                <input autofocus="autofocus" id="tags" name="tags" size="30" type="text" value="" /><br>
+                <input type="submit" value="Search" />
+              </div>
+        </form>  </div>
+          <div> 
+                  <img src="/images/1.gif"/>
+                  <img src="/images/4.gif"/>
+                  <img src="/images/0.gif"/>
+                  <img src="/images/6.gif"/>
+                  <img src="/images/0.gif"/>
+                  <img src="/images/8.gif"/>
+          </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+    </body>
+</html>

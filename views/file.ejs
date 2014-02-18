@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="个人信息页 - 文件页">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container gallery">
+            <% if(typeof ntabs == 'undefined' || ntabs == false){ %>
+            <div class="row">
+                <a href="#"><img src="/images/beauty/qing_ming_shang_he_tu_01.png" width="100%" height="300"></a>
+            </div>
+            <div class="row self_profile">
+                <ul class="nav nav-tabs nav_profile">
+                    <li><a href="./profile">个人信息</a></li>
+                    <li><a href="./posts">帖子</a></li>
+                    <li><a href="./gallery">相册</a></li>
+                    <li class="active"><a href="#">文件</a></li>
+                </ul>
+            </div>
+            <% } %>
+            <div class="row">
+                <div class="col-md-8">
+                <ol id="" style="position:relative;min-height:150px;" class="">
+                <% if(typeof files !==  'undefined' && files != null){ %>
+                <% for(var i = 0; i < files.length; ++i){ %>
+                        <li><a class="btn btn-link" href="/uploads/doc/<%= files[i].name %>"><%= files[i].name %></a></li>
+                <% }//for %>
+                <% }//if %>
+                </ol>
+                </div>
+            <% include ./nav/tupian_xinshang.ejs %>
+            </div><!-- row -->
+        </div>
+<script>
+   var files = <%- JSON.stringify(files) %>;
+</script>
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+$(document).ready(function(){
+});
+</script>
+    </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="学习文档 - 用户信息页， 这里可以看到用户的基本信息、个人隐私、教育信息、联系方式和自我介绍等；">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+        <style></style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        <div class="container main_container user_profile">
+            <div class="row">
+                <a href="#"><img src="/images/beauty/qing_ming_shang_he_tu_01.jpg" width="100%" height="300"></a>
+            </div>
+            <div class="row self_profile">
+                <ul class="nav nav-tabs nav_profile">
+                    <li class="active"><a href="#">个人信息</a></li>
+                    <li><a href="./posts">帖子</a></li>
+                    <li><a href="./gallery">相册</a></li>
+                    <li><a href="./file">文件</a></li>
+                </ul>
+            </div>
+            <div class="row col-md-11 col-md-offset-1">
+                <!-- 基本信息 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"  cat="basic">
+                            <h3 class="panel-title">基本信息<a class="btn btn-link  btn-xs"><i class="fa fa-save fa-fw"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                            <% if(typeof other !==  'undefined' && other != null){ %>
+                            <% var info = ['name', 'password', 'mail', '_id']; var header = ['昵称', '密码', '邮箱', 'ID'];%>
+                            <tbody>
+                            <% for(var i = 0; i < info.length; ++i){ %>
+                                <tr>
+                                    <td><%= header[i] %></td>
+                                    <td title="<%=info[i]%>"><%= other[info[i]] %></td>
+                                </tr>
+                            <% }//for %>
+                            <% }//if %>
+                            </tbody>
+                            </table>
+                            <% if(typeof user != 'undefined' && typeof other != 'undefined' && user == other){ // 注销 %>
+                            <form class="form-horizontal profile_form" method="GET" action="/logout" id="logout">
+                                <button type="submit" class="btn btn-success btn-sm">注销</button>
+                            </form>
+                            <% }//if %>
+                        </div>
+                    </div>
+                
+                <!--  教育信息 -->
+                    <div class="panel panel-success ">
+                        <div class="panel-heading" cat="education">
+                            <h3 class="panel-title">教育信息<a class="btn btn-link  btn-xs"><i class="fa fa-save fa-fw"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table no_border">
+                            <% if(typeof other !==  'undefined' && other != null){ %>
+                            <% var info = ['above_master', 'university', 'high_school', 'middle_school', 'primary_school']; var header = ['本科以上', '本科', '高中', '初中', '小学'];%>
+                            <tbody>
+                            <% for(var i = 0; i < info.length; ++i){ %>
+                                <tr>
+                                    <td width="25%"><%= header[i] %></td>
+                                    <td title="<%=info[i]%>"><% if(other.education != null && other.education[info[i]] != null){ %> <%= other.education[info[i]] %><%}%></td>
+                                </tr>
+                            <% }//for %>
+                            <% }//if %>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+
+
+                </div>
+                
+                <div class="row col-md-11 col-md-offset-1">
+                    <!--  隐私信息 -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading"  cat="privacy">
+                            <h3 class="panel-title">隐私信息<a class="btn btn-link  btn-xs"><i class="fa fa-save fa-fw"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table no_border">
+                                <tbody>
+                                    <% if(typeof other !==  'undefined' && other != null){ %>
+                                    <% var info = ['sex', 'birthday', 'age', 'marriage']; var header = ['性别', '出生年月', '年纪', '婚姻情况'];%>
+                                    <% for(var i = 0; i < info.length; ++i){ %>
+                                        <tr>
+                                            <td width="25%"><%= header[i] %></td>
+                                            <td title="<%=info[i]%>"><% if(other.privacy != null && other.privacy[info[i]] != null){ %> <%= other.privacy[info[i]] %><%}%></td>
+                                        </tr>
+                                    <% }//for %>
+                                    <% }//if %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                
+                <!--  小故事 -->
+                    <div class="panel panel-warning">
+                        <div class="panel-heading"  cat="story">
+                            <h3 class="panel-title">Story<a class="btn btn-link  btn-xs"><i class="fa fa-save fa-fw"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table no_border">
+                                <tbody>
+                                    <% if(typeof other !==  'undefined' && other != null){ %>
+                                    <% var info = ['self_intro', 'tag', 'motto']; var header = ['自我介绍', '标签', '座右铭'];%>
+                                    <% for(var i = 0; i < info.length; ++i){ %>
+                                        <tr>
+                                            <td width="25%"><%= header[i] %></td>
+                                            <td title="<%=info[i]%>"><% if(other.story != null && other.story[info[i]] != null){ %> <%= other.story[info[i]] %><%}%></td>
+                                        </tr>
+                                    <% }//for %>
+                                    <% }//if %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+                </div>
+                
+                <div class="row col-md-11 col-md-offset-1">
+            
+                <!--  联系信息 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"  cat="contact">
+                            <h3 class="panel-title">联系方式<a class="btn btn-link  btn-xs"><i class="fa fa-save fa-fw"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table no_border">
+                                <tbody>
+                                    <% if(typeof other !==  'undefined' && other != null){ %>
+                                    <% var info = ['homepage', 'weibo', 'other']; var header = ['个人主页', '微博', '其他'];%>
+                                    <% for(var i = 0; i < info.length; ++i){ %>
+                                        <tr>
+                                            <td  width="25%"><%= header[i] %></td>
+                                            <td title="<%=info[i]%>"><% if(other.contact != null && other.contact[info[i]] != null){ %> <%= other.contact[info[i]] %><%}%></td>
+                                        </tr>
+                                    <% }//for %>
+                                    <% }//if %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                
+            </div><!-- row -->
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+    </body>
+<script>
+$(document).ready(function(){
+    <% if(typeof other !=  'undefined' && typeof user != 'undefined' && other && user && (other._id == user._id || user.name =='admin')){ %>
+    // 修改个人信息
+    $(".panel-heading h3 .btn-link").on("click", function(e){
+        var cat = $(this).parents(".panel-heading").attr("cat");    // 信息分类
+        var rows = $(this).parents(".panel-heading").next().find("td:nth-child(even)");    // 
+        var user = {};    //
+        var info = user;
+        if(cat != "basic")
+            info = user[cat] = {};    // privacy, education, story, contact
+
+        rows.each(function(){
+            key =  $(this).attr("title"); 
+            value =  $(this).text();
+            info[key] = value;
+        });
+        $.post("/profile-update", {"user": user, "cat" : cat}, function(msg){
+            if(msg.error){
+                alert(msg.error.info);
+            }else{
+                alert("修改成功");
+            }
+        });
+    });
+    
+    // 允许编辑
+    $("table tr td:nth-child(even)").on("click", function(e){
+        var title = $(this).attr('title');
+        if(title == 'mail' || title == '_id' || title == 'password'){
+            return;
+        }
+        // if (e.currentTarget.innerHTML != '' ) return;    // 内容非空则不修改
+        if(e.currentTarget.contentEditable != null){
+            $(e.currentTarget).attr("contentEditable",true);
+        }
+    });
+    
+    <% }// %>
+});
+</script>
+</html>

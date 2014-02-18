@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="上传和下载资料代码等">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        
+        <div class="container main_container upload_image">
+            <div class="row">
+                <div class="col-md-4 upload_div">
+                    <h3>上传图片</h3>
+                    <form class="form-inline" enctype="multipart/form-data" method="POST" action="/file_image_upload" id="upload_image_form">
+                        <fieldset>
+                            <input type="file" name="upload_files" accept="image/*" multiple class="input-medium" id="image_files_input">
+                            <input type="submit" class="btn btn-success btn-xs" value="上传">
+                        </fieldset>
+                    </form>
+                    <h3>上传文件</h3>
+                    <form class="form-inline" enctype="multipart/form-data" method="POST" action="/file_doc_upload" id="upload_file_form">
+                        <fieldset>
+                            <input type="file" name="upload_files" accept="" multiple class="input-medium" id="normal_files_input">
+                            <input type="submit" class="btn btn-success btn-xs" value="上传">
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <div id="file_info_box"></div>
+                </div>
+            </div><!-- row -->
+            <div class="row">
+                <div id="file_show_box"></div>
+            </div>
+        </div> <!-- /container -->
+
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script>
+// 表格中显示图片信息
+function show_img_info(files, id){
+    var i = 0, file = {}, div="", show="";
+    var images = [];
+    
+    div += "<table class='table table-bordered table-hover table_color'><caption>上传文件信息</caption><thead><tr><th width='20%'>图片</th><th width='35%'>文件名</th><th>文件类型</th><th>文件大小(KB)</th></tr></thead>";
+    div += "<tbody>";
+    for(i = 0; i < files.length; ++i){
+        file = files[i];
+        div += "<tr><td></td><td>" + file.name + "</td><td>" + file.type + "</td><td>"+ (file.size/1024).toFixed(2) + "</td></tr>";    // 文件信息 div
+        
+        var img = document.createElement("img");
+        img.file = file;
+        var reader = new FileReader();
+        reader.onload = (function(oimg){
+            return function(e){
+                oimg.src = e.target.result;
+            }
+        })(img);
+        reader.readAsDataURL(file);
+        images.push(img);
+    }
+    div += "</tbody>";
+    $("#"+id).html(div);
+    
+    $("#"+id+" table td:nth-child(4n+1)").each(function(index){
+        images[index].width = 100;
+        $(this).append(images[index]);
+    });
+}
+
+// 表格中显示文件信息
+function show_file_info(files, id){
+    var i = 0, file = {}, div="", show="";
+    var docs = [];
+    
+    div += "<table class='table table-bordered table-hover table_color'><caption>上传文件信息</caption><thead><tr><th width='20%'>文字</th><th width='35%'>文件名</th><th>文件类型</th><th>文件大小(KB)</th></tr></thead>";
+    div += "<tbody>";
+    for(i = 0; i < files.length; ++i){
+        file = files[i];
+        div += "<tr><td></td><td>" + file.name + "</td><td>" + file.type + "</td><td>"+ (file.size/1024).toFixed(2) + "</td></tr>";    // 文件信息 div
+        
+        var paragraph = document.createElement("p");
+        paragraph.file = file;
+        var reader = new FileReader();
+        reader.onload = (function(p){
+            return function(e){
+                p.innerHTML = "看见文字的意义不大";//"<xmp>"+e.target.result.slice(0, 100)+"</xmp>";
+            }
+        })(paragraph);
+        reader.readAsText(file);
+        docs.push(paragraph);
+    }
+    div += "</tbody>";
+    $("#"+id).html(div);
+    
+    $("#"+id+" table td:nth-child(4n+1)").each(function(index){
+        docs[index].style="width:100px; max-height:300px;";
+        $(this).append(docs[index]);
+    });
+}
+
+
+$(document).ready(function(){
+    // 响应选择文件
+    $("#image_files_input").on("change", function(event){
+        var files = event.target.files;
+        show_img_info(files, "file_info_box");
+    });
+    $("#normal_files_input").on("change", function(event){
+        event.preventDefault();    // 阻止默认(提交)操作
+        var files = event.target.files;
+        show_file_info(files, "file_info_box");
+    });
+    //
+    $("#upload_image_form").submit(function(event){
+        event.preventDefault(); //Prevent Default action.
+        if($("#file_info_box").text() == ""){
+            alert('请选择文件 !');
+            return;
+        }
+        var form = $(this);
+        var upload_data = new FormData(this);
+        $.ajax({
+            xhr: function(){    // 进度条
+                var req = new XMLHttpRequest();    //$.ajaxSettings.xhr();
+                if(req){
+                    req.upload.addEventListener('progress', function(event){
+                        if (event.lengthComputable){
+                            // $("progress").attr("value", event.loaded/event.total*100);
+                        }
+                    }, false);
+                }
+                return req;
+            },
+            url: form.attr("action"),
+            type: 'POST',
+            data:  upload_data,
+            mimeType:"multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(msg, textStatus, jqXHR){
+                if(typeof msg == "string");
+                    msg = JSON.parse(msg);
+                if(msg.error){
+                    alert(msg.error.info);
+                }else
+                    alert("图片已经成功上传!");
+                $("#image_files_input").val("");
+                $("#file_info_box").text("");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {},
+            beforeSend:function(){}
+        });
+    });
+    
+    
+    $("#upload_file_form").submit(function(event){
+        event.preventDefault(); //Prevent Default action.
+        if($("#file_info_box").text() == ""){
+            alert('请选择文件 !');
+            return;
+        }
+        var form = $(this);
+        var upload_data = new FormData(this);
+        $.ajax({
+            xhr: function(){    // 进度条
+                var req = new XMLHttpRequest();    //$.ajaxSettings.xhr();
+                if(req){
+                    req.upload.addEventListener('progress', function(event){
+                        if (event.lengthComputable){
+                            // $("progress").attr("value", event.loaded/event.total*100);
+                        }
+                    }, false);
+                }
+                return req;
+            },
+            url: form.attr("action"),
+            type: 'POST',
+            data:  upload_data,
+            mimeType:"multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(msg, textStatus, jqXHR){
+                if(typeof msg == "string");
+                    msg = JSON.parse(msg);
+                if(msg.error){
+                    alert(msg.error.info);
+                }else
+                    alert("文件已经成功上传!");
+                $("#normal_files_input").val("");
+                $("#file_info_box").text("");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {},
+            beforeSend:function(){}
+        });
+    });
+    
+});
+</script>
+    </body>
+</html>

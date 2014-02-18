@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= title %></title>
+
+        <meta name="description" content="青瓷文化艺术 - 用户登陆页面">
+        <meta name="author" content="@濠梁钓鱼">
+
+        <% include pre-header.ejs %>        
+        <!-- specific css -->
+        <link rel="stylesheet" href="/stylesheets/main.css">
+        
+         <style>
+         </style>
+    </head>
+    <body>
+        <% include ./nav/header-nav.ejs %>
+        <div class="container login main_container">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="/images/beauty/qing_ming_shang_he_tu_01.jpg" width="100%">
+                </div>
+                <div class="col-md-3 form_div">
+                    <form class="form-horizontal" method="POST" action="/verify-login" id="login_form">
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                <input class="form-control" type="email" id="input_mail" name="mail" placeholder="请输入正确格式的邮箱"  pattern="^\w+@[\w\d]+?\.[\w]{2,3}(\.[\w]{2,3})?$" tabindex="1" required autofocus>
+                        </div>
+                        
+                        <div class="input-group input-group-sm margin-bottom-sm">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input class="form-control" type="password" id="input_password" name="password"  placeholder="密码，不会忘记了吧 ? " tabindex="2" required>
+                        </div>
+                        <div class="form-group submit">
+                            <button type="submit" class="btn btn-sm btn-success" tabindex="3"><i class="fa fa-user fa-fw"></i> &nbsp; 登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- /container -->
+        <% include footer.ejs %>
+        <% include post-footer.ejs %>
+<script type="text/javascript">
+// 显示错误信息
+function show_error_msg(msg)
+{
+    var anchor = msg.type == "mail" ? "input_mail" : "input_password";
+    $("#"+anchor).popover({placement: "right",container: "body", content: msg.info});    // delay:{show:100, hide:1000}
+    $("#"+anchor).popover("show");
+    window.setTimeout(function() {
+        $("#"+anchor).popover("destroy");
+    }, 3000);
+}
+$(document).ready(function(){
+    $("#login_form").submit(function(event){
+        event.preventDefault();    // 阻止默认(提交)操作
+        
+        var mail = $("#input_mail").val().trim();
+        var pwd = $("#input_password").val().trim();
+        // alert(mail + " " + pwd);
+        
+        if(mail == ""){
+            show_error_msg({type:"mail", info:"邮箱不能为空 ! "});
+            return;
+        }
+        var mail_pattern = /^\w+@[\w\d]+?\.[\w]{2,3}(\.[\w]{2,3})?$/;
+        if(!mail.match(mail_pattern)){
+            show_error_msg({type:"mail", info:"请输入正确的邮箱格式 ! "});
+            return;
+        }
+        
+        if(pwd == ""){
+            show_error_msg({type:"password", info:"密码不能为空 ! "});
+            return;
+        }
+        $.post("/verify-login", {"mail": mail, "password": pwd}, function(msg){
+            // alert(msg + " " + msg.error + " " + msg.object);
+            if(msg.error){
+                $("#input_password").val("");
+                show_error_msg(msg.error);
+            }else{
+                // alert(msg.object);
+                show_error_msg({type : "password", info:"登陆成功 ! 1 秒后自动跳转到 profile 页 !"});
+                window.setTimeout(function() {
+                    window.location.href = "/profile";
+                }, 1000);
+            }
+        });
+    });
+});
+</script>
+    </body>
+</html>

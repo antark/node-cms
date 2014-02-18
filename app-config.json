@@ -1,0 +1,6 @@
+{
+    "server_name" : "青瓷文化艺术",
+    "server_port" : 3000,
+    "img_uploads_dir" : "/images/uploads/image",
+    "doc_uploads_dir" : "/images/uploads/doc",
+}
