@@ -3,15 +3,13 @@ doc4doc
 
 简介：
 
-    本项目是使用 Node 实现的一个轻量级 CMS (Content Managment System) 系统， 可以不加修改地运行在 BAE (Baidu App Engine) 之上。
+本项目是使用 Node 实现的一个轻量级 CMS (Content Managment System) 系统， 可以不加修改地运行在 BAE (Baidu App Engine) 之上。
 
-    虽然项目使用的是 BAE 限制的 Node 技术，然而并没有额外地使用任何 BAE 扩展，也就是说本应用是一个纯粹的 Node 应用，完全可以本地运行或是运行在其他 Node App Engine 之上。
+虽然项目使用的是 BAE 限制的 Node 技术，然而并没有额外地使用任何 BAE 扩展，也就是说本应用是一个纯粹的 Node 应用，完全可以本地运行或是运行在其他 Node App Engine 之上。
     
-    项目本意是设计一个文档系统， 文档使用 project 作为划分大类、 tags 作为划分小类。文档的写作由注册用户完成， 所以本项目实际上是一个多人博客系统。 然而本应用又以用户为中心来管理文字、图片和文件，将来可能演化成一个 SNS 系统。
+项目本意是设计一个文档系统， 文档使用 project 作为划分大类、 tags 作为划分小类。文档的写作由注册用户完成， 所以本项目实际上是一个多人博客系统。 然而本应用又以用户为中心来管理文字、图片和文件，将来可能演化成一个 SNS 系统。
 
-演示地址 ：
-
-        http://newteck.duapp.com
+演示 ： http://newteck.duapp.com
 
 功能 ：
 
