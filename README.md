@@ -9,7 +9,9 @@ doc4doc
 
 注意：
 
-1. 项目使用了一些 Node 模块，包括 express 、 ejs 、 mongodb 、 formidable ，使用前先安装这些模块；
-2. 项目使用的是 MongoDB 数据库，所以正常使用要安装 MongoDB 数据库。
+1. 项目使用了一些 Node 模块，包括 express 、ejs 、mongodb 、formidable ，使用前先安装这些模块；
+2. 项目使用的是 MongoDB 数据库，所以正常使用要安装 MongoDB 数据库；
+3. 其他...
+
 
 
