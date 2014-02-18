@@ -1,7 +1,7 @@
 doc4doc
 =======
 
-这是一个 Node CMS 项目，代码可以不经修改地运行在 BAE 系统之上。
+这是一个 Node CMS 项目，代码可以不经修改地运行在 BAE 系统(version 2)之上。
 
 本项目是一个纯粹的 Node 项目， 并没有使用 BAE 提供的扩展，所以可以本地运行或是运行在其他 Node App Engine 之上。
 
