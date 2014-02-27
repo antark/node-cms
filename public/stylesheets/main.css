@@ -17,6 +17,7 @@ body{
   font-size: 12px;
   -webkit-text-stroke: 1px rgba(0,0,0,0.1);
   text-shadow: #000 0px 0px 0px;
+  /*font-family: 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;*/
 }
 body, header, footer, article, h1, h2, h3, h4, h5, ol, ul, li, div, p, pre{
   margin: 0;
