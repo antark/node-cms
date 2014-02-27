@@ -46,7 +46,7 @@ exports.map = function(app){
     });
     
     
-    // 获取青瓷欣赏数据 (右侧的图片)
+    // 获取图片欣赏的数据 (右侧的图片)
     app.get('/img-xinshang', function(req, res){
         var ret = {};
         var nskip = +req.query.nskip || 0;

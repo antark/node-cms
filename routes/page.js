@@ -389,6 +389,27 @@ exports.map = function(app){
         });
     });
     
+    // 图片墙页面
+    app.get('/gallery-wall', function (req, res){
+        var userModel = new User();
+        var imageModel = new Image();
+        
+        userModel.findOne({'name': 'admin'}, function(msg){
+            if(msg.error || !msg.object){
+                res.render('index', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, ntabs: true});    //
+            }else{
+                admin = msg.object;    // admin 账号
+                imageModel.findOnePage({'user_id': admin._id.toString()}, function(msg){
+                    if(msg.error){
+                        res.render('gallery', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, ntabs: true, 'other': null});    //
+                    }else{
+                        res.render('gallery', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, gallery: msg.objects, ntabs: true, 'other': admin});    //
+                    }
+                });
+            }
+        });
+    });
+    
     // 相册页面
     app.get('/gallery', function (req, res){
         if(!req.session.user){
