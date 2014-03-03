@@ -41,9 +41,7 @@
                     <div class="posts_content">
                     <div class="posts_meta">由 <a href="<%= post.user_name ? '/+'+post.user_name : '#' %>"><%= post.user_name || '未知' %></a> 于 <%= post_time %> 时间写成</div>
                     <div class="posts_meta"><i class="fa fa-tags fa-fw"></i>：
-                    <% for(ii in post.tags){ %>
-                        &ensp;<a href="/tags/<%=post.tags[ii]%>"><%= post.tags[ii] %></a>
-                    <%}%>
+                    <% for(ii in post.tags){ %><a href="/tags/<%=post.tags[ii]%>"><%= post.tags[ii] %></a>&emsp;<%}%>
                     </div>
                     <p><%- post.content %></p>
                     </div>
