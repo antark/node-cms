@@ -231,7 +231,7 @@ exports.map = function(app){
         
         var userModel = new User();
         var user = {};
-        user._id = req.session.user._id;    // 获取 ID
+        user._id = req.body.user.id ? req.body.user.id : req.session.user._id;    // 获取 ID
         var setter = {$set:{}};
         var cat = req.body.cat;
         if(cat != 'basic' && cat != 'privacy' && cat != 'education' && cat != 'story' && cat != 'contact'){

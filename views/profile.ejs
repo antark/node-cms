@@ -163,10 +163,11 @@
 $(document).ready(function(){
     <% if(typeof other !=  'undefined' && typeof user != 'undefined' && other && user && (other._id == user._id || user.name =='admin')){ %>
     // 修改个人信息
+    var other_user_id = "<%=other._id%>";
     $(".panel-heading h3 .btn-link").on("click", function(e){
         var cat = $(this).parents(".panel-heading").attr("cat");    // 信息分类
         var rows = $(this).parents(".panel-heading").next().find("td:nth-child(even)");    // 
-        var user = {};    //
+        var user = {id:other_user_id};    //
         var info = user;
         if(cat != "basic")
             info = user[cat] = {};    // privacy, education, story, contact
