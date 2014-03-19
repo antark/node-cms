@@ -1,6 +1,26 @@
 {
-    "server_name" : "青瓷文化艺术",
-    "server_port" : 3000,
-    "img_uploads_dir" : "/images/uploads/image",
-    "doc_uploads_dir" : "/images/uploads/doc",
+    "server": {
+        "server_description" : "doc4doc - 文档的文档",
+        "server_name" : "doc4doc",
+        "server_port" : 18080
+    },
+    "bae": true,
+    "database_local": {
+        "db_name" : "node",
+        "db_host" : "127.0.0.1",
+        "db_port" : 27017,
+        "username" : "ant",
+        "password" : "ant"
+    },
+    "database_bae": {
+        "db_name" : "OMgCwmHmaMNclxEqvFbK",
+        "db_host" : "mongo.duapp.com",
+        "db_port" : 8908,
+        "username" : "yY2wrMlyfnyikkRBjefzS4qo",
+        "password" : "YkwN56UNITosIlGRQdkcjPbOnCBXX8C4"
+    },
+    "upload": {
+        "img_uploads_dir" : "/images/uploads/image",
+        "doc_uploads_dir" : "/images/uploads/doc"
+    }
 }

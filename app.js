@@ -9,12 +9,14 @@ var path = require('path');
 var fs = require('fs');
 var router = require('./routes/router');    // App 的自定义路由信息
 
+var AppConfig = require('./app-config.json');    // AppConfig
+
 var app = express();
 
 
 // ====================  App 设置  ====================
 
-app.set('port', process.env.PORT || process.env.APP_PORT || 3000);    // 端口设置
+app.set('port', AppConfig.server.server_port);    // 端口设置
 app.set('views', path.join(__dirname, 'views'));    // 设置视图 View 所在的路径
 app.set('view engine', 'ejs');    // html 模板引擎
 
@@ -52,7 +54,7 @@ router.map(app);
 // ====================  创建 http 服务器  ====================
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Qingci app server listening on port ' + app.get('port'));
+    console.log('doc4doc app server listening on port ' + app.get('port'));
 });
 
 

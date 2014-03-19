@@ -5,18 +5,15 @@
 var Db = require('mongodb').Db;
 var Server = require('mongodb').Server;
 
+var AppConfig = require('../app-config.json');    // AppConfig
+var databaseConfig = AppConfig.bae ? AppConfig.database_bae : AppConfig.database_local;
+
 // 数据库配置信息
-// var db_name = 'MSkCkkXtzwmoBJhYzyyL';                 // 数据库名，从云平台获取 ， newteck 的数据库
-// var db_name = 'eSZsNQyCsqPCKVmFOOER';                  // 数据库名，从云平台获取 , qingci 数据库
-// var db_host =  process.env.BAE_ENV_ADDR_MONGO_IP;      // 数据库地址
-// var db_port =  +process.env.BAE_ENV_ADDR_MONGO_PORT;   // 数据库端口
-// var username = process.env.BAE_ENV_AK;                 // 用户名
-// var password = process.env.BAE_ENV_SK;                 // 密码
-var db_name = 'node';
-var db_host =  '127.0.0.1';
-var db_port =  27017;
-var username = 'ant';
-var password = 'ant';
+var db_name = databaseConfig.db_name;   // 数据库名，从云平台获取 ， OMgCwmHmaMNclxEqvFbK (doc4doc), MSkCkkXtzwmoBJhYzyyL (newteck), eSZsNQyCsqPCKVmFOOER (qingci)
+var db_host =  databaseConfig.db_host;      // 数据库地址
+var db_port =  +databaseConfig.db_port;   // 数据库端口
+var username = databaseConfig.username;    // 用户名
+var password = databaseConfig.password;    // 密码
  
 var db = new Db(
     db_name,    // 数据库的名字
@@ -24,10 +21,6 @@ var db = new Db(
         {poolSize: 10, auto_reconnect: true}    // 数据库服务器设置， 连接池和自动连接
     ),
     {w: 1});    // 数据库选项， w >= 1 保证“写入”
-exports.db = db;
-
-// 数据库连接状态
-// Db.prototype.is_connected = false;
 
 // 连接数据库 
 Db.prototype.connect = function(){
@@ -39,10 +32,10 @@ Db.prototype.connect = function(){
                 console.log('authenticate failed and error : ' + error);
             }else{
                 console.log('have connected mongodb and finished authenticating ...');
-                // db.is_connected = true;
             }
         });
     });
 };
 
-db.connect();
+exports.db = db;    // 导出 db
+db.connect();    // 连接数据库

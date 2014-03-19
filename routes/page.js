@@ -23,8 +23,6 @@ var Doc = require('../model/doc').Doc;    // DocDAO
 var Project = require('../model/project').Project;    // ProjectDAO
 var Tag = require('../model/tag').Tag;    // TagDAO
 
-// var AppConfig = require('../app-config.json');    // AppConfig
-
 exports.map = function(app){
     var admin = null;    // 管理员账号
     

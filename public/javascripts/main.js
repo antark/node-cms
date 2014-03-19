@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 //=====================================================================================
 // 图片欣赏 - 右侧图片栏
-var img_xinshang_gallery;    // 
+var img_xinshang_gallery = img_xinshang_gallery || [];    // 
 var img_xinshang_index = 0;    //
 
 $(document).ready(function(){

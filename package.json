@@ -1,3 +1,16 @@
 {
-    "main": "app.js"
+    "name": "doc4doc",
+    "version": "1.0.0",
+    "author": "http://www.lrj.name",
+    "description": "this is a doc project",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "3.4.2",
+        "formidable": ">=1.0.12",
+        "ejs": "0.8.4",
+        "mongodb": "1.3.19"
+    }
 }
+
