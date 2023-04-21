@@ -1,8 +1,8 @@
 {
     "server": {
-        "server_description" : "doc4doc - 文档的文档",
-        "server_name" : "doc4doc",
-        "server_port" : 18080
+        "server_description" : "antark",
+        "server_name" : "antakr",
+        "server_port" : 8080
     },
     "bae": true,
     "database_local": {

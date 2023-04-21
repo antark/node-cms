@@ -1,5 +1,5 @@
 /**
- * 主文件 app.js
+ * 脰梅脦脛录镁 app.js
  */
 
 var express = require('express');
@@ -7,58 +7,66 @@ var http = require('http');
 // var https = require('https');
 var path = require('path');
 var fs = require('fs');
-var router = require('./routes/router');    // App 的自定义路由信息
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var methodOverride = require('method-override');
+
+var errorhandler = require('errorhandler');
+
+var router = require('./routes/router');    // App 碌脛脳脭露篓脪氓脗路脫脡脨脜脧垄
 
 var AppConfig = require('./app-config.json');    // AppConfig
 
 var app = express();
 
 
-// ====================  App 设置  ====================
+// ====================  App 脡猫脰脙  ====================
 
-app.set('port', AppConfig.server.server_port);    // 端口设置
-app.set('views', path.join(__dirname, 'views'));    // 设置视图 View 所在的路径
-app.set('view engine', 'ejs');    // html 模板引擎
+app.set('port', AppConfig.server.server_port);    // 露脣驴脷脡猫脰脙
+app.set('views', path.join(__dirname, 'views'));    // 脡猫脰脙脢脫脥录 View 脣霉脭脷碌脛脗路戮露
+app.set('view engine', 'ejs');    // html 脛拢掳氓脪媒脟忙
 
 
 
-// ====================  中间件设置(顺序很重要)  ====================
+// ====================  脰脨录盲录镁脡猫脰脙(脣鲁脨貌潞脺脰脴脪陋)  ====================
 
-app.use(express.logger('dev'));    // 开发日志
-// 访问日志
-// var access_log_file = fs.createWriteStream('./log/access_log.log', { flags: 'a', encoding: 'utf8' });    // 访问日志文件
+app.use(logger('dev'));    // 驴陋路垄脠脮脰戮
+// 路脙脦脢脠脮脰戮
+// var access_log_file = fs.createWriteStream('./log/access_log.log', { flags: 'a', encoding: 'utf8' });    // 路脙脦脢脠脮脰戮脦脛录镁
 // app.use(express.logger({stream: access_log_file}));
 
-app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));    // favicon 路径
-// app.use(express.bodyParser());    // 不兼容文件上传
-app.use(express.json());
-app.use(express.urlencoded());
+//app.use(express.favicon(path.join(__dirname, 'public/images/favicon.ico')));    // favicon 脗路戮露
+// app.use(express.bodyParser());    // 虏禄录忙脠脻脦脛录镁脡脧麓芦
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
 
-app.use(express.cookieParser());
-app.use(express.session({secret: "This is a secret"}));
-app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));    // 静态 (images + css + js + fonts) 资源所在的路径 (可以设置多个)
+app.use(cookieParser());
+app.use(session({secret: 'sessiontest'}));
+app.use(methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));    // 戮虏脤卢 (images + css + js + fonts) 脳脢脭麓脣霉脭脷碌脛脗路戮露 (驴脡脪脭脡猫脰脙露脿赂枚)
 
-app.use(app.router);
+//app.use(app.router);
 
-if ('development' == app.get('env')) {    // 开发环境下的错误处理
-  app.use(express.errorHandler());
+if ('development' == app.get('env')) {    // 驴陋路垄禄路戮鲁脧脗碌脛麓铆脦贸麓娄脌铆
+  app.use(errorhandler());
 }
 
 
-// ====================  自定义路由信息  ====================
+// ====================  脳脭露篓脪氓脗路脫脡脨脜脧垄  ====================
 
 router.map(app);
 
 
-// ====================  创建 http 服务器  ====================
+// ====================  麓麓陆篓 http 路镁脦帽脝梅  ====================
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('doc4doc app server listening on port ' + app.get('port'));
 });
 
 
-// ====================  创建 https 服务器  ====================
+// ====================  麓麓陆篓 https 路镁脦帽脝梅  ====================
 /*
 var options = {
   key: fs.readFileSync('./cert/privatekey.pem'),
@@ -69,3 +77,4 @@ https.createServer(options, app).listen(app.get('port'), function(){
   console.log('NewTeck server listening on port ' + app.get('port'));
 });
 */
+
