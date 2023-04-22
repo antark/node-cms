@@ -6,7 +6,7 @@ function main() {
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost/node?retryWrites=true&w=majority";
+    const uri = "mongodb://localhost:27017/node?retryWrites=true&w=majority";
     
     /**
      * The Mongo Client you will use to interact with your database
@@ -15,18 +15,22 @@ function main() {
      * pass option { useUnifiedTopology: true } to the MongoClient constructor.
      * const client =  new MongoClient(uri, {useUnifiedTopology: true})
      */
-    client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+    client = MongoClient();
 
     try {
         // Connect to the MongoDB cluster
-        client.connect(
-            err => {
+        MongoClient.connect(
+            uri, 
+            { useNewUrlParser: true, useUnifiedTopology: true}
+            function(err, db) => {
                         if (!err) {
                             console.log("Connected successfully to server.");
                         } else {
                             console.log('Error in DB connection : ', JSON.stringify(err, undefined, 2));
                         }
                     }
+
+                    client = db;
             );
 
         // Make the appropriate DB calls
