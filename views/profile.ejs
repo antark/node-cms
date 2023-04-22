@@ -7,14 +7,14 @@
         <meta name="description" content="学习文档 - 用户信息页， 这里可以看到用户的基本信息、个人隐私、教育信息、联系方式和自我介绍等；">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>
+        <%-include('pre-header.ejs') %> 
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
         <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         <div class="container main_container user_profile">
             <div class="row">
                 <a href="#"><img src="/images/beauty/qing_ming_shang_he_tu_01.jpg" width="100%" height="300"></a>
@@ -156,8 +156,8 @@
             </div><!-- row -->
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
     </body>
 <script>
 $(document).ready(function(){

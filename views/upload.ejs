@@ -7,7 +7,7 @@
         <meta name="description" content="上传和下载资料代码等">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>        
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
@@ -15,7 +15,7 @@
          </style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container main_container upload_image">
             <div class="row">
@@ -44,8 +44,8 @@
             </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 <script>
 // 表格中显示图片信息
 function show_img_info(files, id){

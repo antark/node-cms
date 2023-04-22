@@ -7,14 +7,14 @@
         <meta name="description" content="Doc4Doc - 文档的文档 - 介绍本站点的目的">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>        
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
         <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container main_container">
             <div class="row">
@@ -25,7 +25,7 @@
             </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
     </body>
 </html>

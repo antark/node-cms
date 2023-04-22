@@ -5,12 +5,12 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>青瓷文化艺术 - 搜索页面</title>
+        <title>搜索页面</title>
 
         <meta name="description" content="搜索青瓷文化艺术站点的内容">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>
+        <%-include('pre-header.ejs') %>
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/search.css">
         
@@ -18,7 +18,7 @@
          </style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container">
             <h1><a href="/posts-all"></a></h1>
@@ -46,7 +46,7 @@
           </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
     </body>
 </html>

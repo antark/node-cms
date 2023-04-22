@@ -7,15 +7,14 @@
         <meta name="description" content="青瓷文化艺术 - 用户登陆页面">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
-         <style>
-         </style>
+        <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         <div class="container login main_container">
             <div class="row">
                 <div class="col-md-7">
@@ -39,8 +38,8 @@
                 </div>
             </div>
         </div> <!-- /container -->
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 <script type="text/javascript">
 // 显示错误信息
 function show_error_msg(msg)

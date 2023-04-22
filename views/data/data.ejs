@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <title><%= title %></title>
 
-        <meta name="description" content="关于青瓷站点的由来">
+        <meta name="description" content="">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include ../pre-header.ejs %>        
+        <%- include('../pre-header.ejs') %>        
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
@@ -15,7 +15,7 @@
          </style>
     </head>
     <body>
-        <% include ../nav/header-nav.ejs %>
+        <%- include('../nav/header-nav.ejs') %>
         
         <div class="container main_container">
             <div class="row">
@@ -32,8 +32,8 @@
             </div>
         </div> <!-- /container -->
 
-        <% include ../footer.ejs %>
-        <% include ../post-footer.ejs %>
+        <%- include('../footer.ejs') %>
+        <%- include(' ../post-footer.ejs') %>
     </body>
 <script>
 $(document).ready(function(){

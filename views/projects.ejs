@@ -7,14 +7,14 @@
         <meta name="description" content="">
         <meta name="author" content="@濠梁钓鱼">
         
-        <% include pre-header.ejs %>
+        <%-include('pre-header.ejs') %>
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
         <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container main_container projects">
             <div class="row">
@@ -31,8 +31,8 @@
         
 <script>
 </script>
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 <script>
 </script>
     </body>

@@ -7,7 +7,7 @@
         <meta name="description" content="青瓷文化艺术站点所有注册的会员">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>     
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
@@ -15,7 +15,8 @@
          </style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
+        
         <div class="container main-content">
             <h2 class="mark_first_letter">用户列表</h2>
             <p>本站目前注册人员有： <% if(typeof n_all != 'undefined' && n_all != null) {%><%= n_all %> <% } %> 位，
@@ -95,8 +96,8 @@
             </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 <script>
 $(document).ready(function(){
     $("#page_select").change(function(){

@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>   
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         <link rel="stylesheet" href="/plugins/summernote/summernote.css">
@@ -15,7 +15,7 @@
         <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         <div class="container main_container post_edit">
         <div class="row">
             <div class="col-md-8">
@@ -61,8 +61,8 @@
         </div><!-- row -->
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
         <script type="text/javascript" src="/plugins/summernote/summernote.js"></script>
 <script>
 // ---------------------------------------------------------------------------------------------------------

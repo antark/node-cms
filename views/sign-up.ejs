@@ -7,14 +7,14 @@
         <meta name="description" content="学习文档 - 注册成为会员吧， 参与讨论吧，帮助别人， 提升自己">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>        
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
         <style></style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container sign-up main_container">
             <div class="row">
@@ -53,8 +53,8 @@
             </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 <script>
 
 // 显示错误信息

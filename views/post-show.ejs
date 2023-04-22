@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>          
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
@@ -15,7 +15,7 @@
          </style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container posts">
             <div class="row article">
@@ -72,8 +72,8 @@
 <script>
     var post = <%- JSON.stringify(post) %>;
 </script>
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
 
 <!-- 语法高亮 -->
 <script src="/plugins/google-code-prettify/run_prettify.js"></script>
