@@ -19,13 +19,13 @@ function main() {
 
     try {
         // Connect to the MongoDB cluster
-        await client.connect();
+        client.connect();
 
         // Make the appropriate DB calls
 
     } finally {
         // Close the connection to the MongoDB cluster
-        await client.close();
+        client.close();
     }
 }
 
