@@ -19,7 +19,13 @@ function main() {
 
     try {
         // Connect to the MongoDB cluster
-        client.connect();
+        client
+            .connect()    
+            .catch(err => {
+                console.log(err.stack);
+                process.exit(1);
+
+            });
 
         // Make the appropriate DB calls
 
