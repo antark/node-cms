@@ -39,21 +39,28 @@ Project.prototype.findOne = function(condition, callback){
 };
 
 // Project.findOnePage ： 查找一页
-Project.prototype.findOnePage = function(condition, callback){
+Project.prototype.findOnePage = async function(condition, callback){
     var msg = {};
     var nskip = +condition.nskip || 0, n = +condition.n || 15;
     
     if(typeof condition.nskip != 'undefined') delete condition.nskip;
     if(typeof condition.n != 'undefined') delete condition.n;
     
-    db.collection('projects').find(condition).skip(nskip).limit(n).toArray(function(error, objects){
-        if(error){
+
+    var s = await db.collection('projects').find();
+    console.log(JSON.stringify(s));
+	var list = await s/*.skip(nskip).limit(n).*/.toArray(function(error, objects){
+        console.log("projects result:"+JSON.stringify(objects));
+	if(error){
             console.log('error : ' + error);
         }
         msg.error = error;
         msg.objects = objects;
         callback(msg);
     });
+
+	msg.objects = list;
+	callback(msg);
 };
 
 // Project.update ： 更新 project

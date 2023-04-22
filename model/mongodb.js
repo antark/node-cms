@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 var client;
-function main() {
+async function mongo_main() {
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/drivers/node/ for more details
@@ -15,33 +15,23 @@ function main() {
      * pass option { useUnifiedTopology: true } to the MongoClient constructor.
      * const client =  new MongoClient(uri, {useUnifiedTopology: true})
      */
-    client = MongoClient();
 
     try {
         // Connect to the MongoDB cluster
-        MongoClient.connect(
-            uri, 
-            { useNewUrlParser: true, useUnifiedTopology: true}
-            function(err, db) => {
-                        if (!err) {
-                            console.log("Connected successfully to server.");
-                        } else {
-                            console.log('Error in DB connection : ', JSON.stringify(err, undefined, 2));
-                        }
-                    }
-
-                    client = db;
-            );
-
+	client = new MongoClient(uri,
+            { useNewUrlParser: true, useUnifiedTopology: true});
+	await client.connect();
         // Make the appropriate DB calls
 
+    }catch(e){
+    	console.log(JSON.stringfiy(s));
     } finally {
         // Close the connection to the MongoDB cluster
         // client.close();
     }
 }
 
-main();
+mongo_main();
 
 // Add functions that make DB calls here
 
