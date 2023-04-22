@@ -47,9 +47,7 @@ Project.prototype.findOnePage = async function(condition, callback){
     if(typeof condition.n != 'undefined') delete condition.n;
     
 
-    var s = await db.collection('projects').find();
-    console.log(JSON.stringify(s));
-	var list = await s/*.skip(nskip).limit(n).*/.toArray(function(error, objects){
+    var list = await db.collection('projects').find().skip(nskip).limit(n).toArray(function(error, objects){
         console.log("projects result:"+JSON.stringify(objects));
 	if(error){
             console.log('error : ' + error);
