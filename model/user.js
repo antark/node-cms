@@ -20,7 +20,8 @@ exports.User = User;
 // User.insert
 User.prototype.insert = async function(users, callback){
     var msg = {};
-    msg.objects = await db.collection('users').insert(users);
+    msg.objects = await db.collection('users').insertMany(users);
+    console.log(JSON.stringify(msg.objects));
     callback(msg);
 };
 
