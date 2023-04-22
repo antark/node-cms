@@ -15,17 +15,19 @@ function main() {
      * pass option { useUnifiedTopology: true } to the MongoClient constructor.
      * const client =  new MongoClient(uri, {useUnifiedTopology: true})
      */
-    client = new MongoClient(uri);
+    client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
 
     try {
         // Connect to the MongoDB cluster
-        client
-            .connect()    
-            .catch(err => {
-                console.log(err.stack);
-                process.exit(1);
-
-            });
+        client.connect(
+            err => {
+                        if (!err) {
+                            console.log("Connected successfully to server.");
+                        } else {
+                            console.log('Error in DB connection : ', JSON.stringify(err, undefined, 2));
+                        }
+                    }
+            );
 
         // Make the appropriate DB calls
 
