@@ -33,7 +33,7 @@ function main() {
 
     } finally {
         // Close the connection to the MongoDB cluster
-        client.close();
+        // client.close();
     }
 }
 

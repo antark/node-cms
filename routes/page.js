@@ -113,7 +113,8 @@ exports.map = function(app){
     
     // 所有项目页面
     app.get('/projects', function (req, res){
-        var projectModel = new Project();
+	console.log("access projects");
+	var projectModel = new Project();
         projectModel.findOnePage({}, function(msg){
             res.render('projects', { title: '所有项目 - Doc4Doc - 文档的文档', user: req.session.user, projects: msg.objects, ntabs: true});
         });
