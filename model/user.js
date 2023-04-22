@@ -18,86 +18,51 @@ function User(){
 exports.User = User;
 
 // User.insert
-User.prototype.insert = function(users, callback){
+User.prototype.insert = async function(users, callback){
     var msg = {};
-    db.collection('users').insert(users, function(error, objects){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('users').insert(users);
+    callback(msg);
 };
 
 // User.find
-User.prototype.find = function(condition, callback){
+User.prototype.find = async function(condition, callback){
     var msg = {};
-    db.collection('users').find(condition).toArray(function(error, objects){    // find 多个
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('users').find(condition).toArray();
+    callback(msg);
 };
 
 // User.findOne
-User.prototype.findOne = function(condition, callback){
+User.prototype.findOne = async function(condition, callback){
     var msg = {};
-    db.collection('users').findOne(condition, function(error, object){    // 只 find 一个
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error
-        msg.object = object;
-        callback(msg);
-    });
+    msg.object = await db.collection('users').findOne(condition);
+    callback(msg);
 };
 
 // User.findOnePage
-User.prototype.findOnePage = function(condition, callback){
+User.prototype.findOnePage = async function(condition, callback){
     var msg = {};
     var nskip = +condition.nskip || 0, n = +condition.n || 15;
     
     if(typeof condition.nskip != 'undefined') delete condition.nskip;
     if(typeof condition.n != 'undefined') delete condition.n;
     
-    db.collection('users').find(condition).skip(nskip).limit(n).toArray(function(error, objects){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('users').find(condition).skip(nskip).limit(n).toArray();
+    callback(msg);
 };
 
 // User.update
-User.prototype.update = function(condition, setter, callback){
+User.prototype.update = async function(condition, setter, callback){
     var msg = {};
     var multi = condition.multi || false;
     if(condition.multi) delete condition.multi;
     
-    db.collection('users').update(condition, setter, {'multi': multi}, function(error, count){    // 默认只更新一个对象
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.number = count;
-        callback(msg);
-    });
+    msg.number = await db.collection('users').update(condition, setter, {'multi': multi});
+    callback(msg);
 };
 
 // User.remove ： 根据条件删 post
-User.prototype.remove = function(condition, callback){
+User.prototype.remove = async function(condition, callback){
     var msg = {};
-    db.collection('users').remove(condition, function(error, collection){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        callback(msg);
-    });
+    await db.collection('users').remove(condition);
+    callback(msg);
 };

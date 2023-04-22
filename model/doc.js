@@ -15,45 +15,27 @@ function Doc(){
 exports.Doc = Doc;
 
 // Doc.insert ： 插入多张 doc
-Doc.prototype.insert = function(docs, callback){    //
+Doc.prototype.insert = async function(docs, callback){    //
     var msg = {};
-    db.collection('docs').insert(docs, function(error, objects){
-        if(error){
-            console.log('error: ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('docs').insert(docs);
+    callback(msg);
 };
 
 // Doc.find ： 查找图片
-Doc.prototype.find = function(condition, callback){
+Doc.prototype.find = async function(condition, callback){
     var msg = {};
-    db.collection('docs').find(condition).sort({upload_time: -1}).toArray(function(error, objects){    // 搜索 docs ， 按时间逆序排列
-        if(error){
-            console.log('error: ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('docs').find(condition).sort({upload_time: -1}).toArray();
+    callback(msg);
 };
 
 // Doc.findOnePage
-Doc.prototype.findOnePage = function(condition, callback){
+Doc.prototype.findOnePage = async function(condition, callback){
     var msg = {};
     var nskip = +condition.nskip || 0, n = +condition.n || 15;
     
     if(typeof condition.nskip != 'undefined') delete condition.nskip;
     if(typeof condition.n != 'undefined') delete condition.n;
     
-    db.collection('docs').find(condition).sort({upload_time: -1}).skip(nskip).limit(n).toArray(function(error, objects){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('docs').find(condition).sort({upload_time: -1}).skip(nskip).limit(n).toArray();
+    callback(msg);
 };

@@ -17,102 +17,62 @@ function Post(){    // ID 、 标题 、 内容、 用户ID 、 时间 、 标签
 exports.Post = Post;
 
 // Post.save ： 保存一个 doc ， 可以是 insert 或是 update 
-Post.prototype.save = function(post, callback){
+Post.prototype.save = async function(post, callback){
     var msg = {};
-    db.collection('posts').save(post, function(error, result){  // insert return object, update return number !
-        if(error){
-            console.log('error: ' + error);
-        }
-        msg.error = error;
-        if(typeof result == 'number'){  // return previous object
-            msg.object = post;
-        }else{  // return inserted object
-            msg.object = result;
-        }
-        callback(msg);
-    });
+    if(!post._id) {
+        msg.object = await db.collection('posts').insertOne(post);
+    }else{
+        msg.object = await db.collection('posts').updateOne(post);
+    }
+
+    callback(msg);
 };
 
 // Post.count ： 搜索 post 的总数目
-Post.prototype.count = function(callback){
+Post.prototype.count = async function(callback){
     var msg = {};
-    db.collection('posts').count(function(error, count){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.number = count;
-        callback(msg);
-    });
+    msg.number = await db.collection('posts').count();
+    callback(msg);
 };
 
 // Post.find
-Post.prototype.find = function(condition, callback){
+Post.prototype.find = async function(condition, callback){
     var msg = {};
-    db.collection('posts').find(condition).toArray(function(error, objects){    // find 多个
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error
-        msg.objects = objects;
-        callback(msg);
-    });
+    msg.objects = await db.collection('posts').find(condition).toArray();
+    callback(msg);
 };
 // Post.findOne
-Post.prototype.findOne = function(condition, callback){
+Post.prototype.findOne = async function(condition, callback){
     var msg = {};
-    db.collection('posts').findOne(condition, {comments: {$slice: -5}}, function(error, object){    // find 多个
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error
-        msg.object = object;
-        callback(msg);
-    });
+    msg.object = await db.collection('posts').findOne(condition, {comments: {$slice: -5}});
+    callback(msg);
 };
+
 // Post.findOnePage ： 通过条件查 post
-Post.prototype.findOnePage = function(condition, callback){
+Post.prototype.findOnePage = async function(condition, callback){
     var msg = {};
     var nskip = +condition.nskip || 0, n = +condition.n || 15;
     
     if(typeof condition.nskip != 'undefined') delete condition.nskip;
     if(typeof condition.n != 'undefined') delete condition.n;
     
-    db.collection('posts').find(condition, {content: 0, comments: 0}).sort({time: -1}).skip(nskip).limit(n).toArray(function(error, objects){    // 
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.objects = objects;
-        console.log(JSON.stringify(objects));
-        callback(msg);
-    });
+    msg.objects = await db.collection('posts').find(condition, {content: 0, comments: 0}).sort({time: -1}).skip(nskip).limit(n).toArray();
+    callback(msg);
 };
 
 // Post.update ： 更新 post
-Post.prototype.update = function(condition, set, callback){
+Post.prototype.update = async function(condition, set, callback){
     var msg = {};
     var multi = condition.multi || false;
     if(condition.multi) delete condition.multi;
     
-    db.collection('posts').update(condition, set, {'multi': multi}, function(error, count){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        msg.number = count;
-        callback(msg);
-    });
+    msg.number = await db.collection('posts').update(condition, set, {'multi': multi});
+    callback(msg);
 };
 
 // Post.remove ： 根据条件删 post
-Post.prototype.remove = function(condition, callback){
+Post.prototype.remove = async function(condition, callback){
     var msg = {};
-    db.collection('posts').remove(condition, function(error, collection){
-        if(error){
-            console.log('error : ' + error);
-        }
-        msg.error = error;
-        callback(msg);
-    });
+    await db.collection('posts').remove(condition);
+    callback(msg);
 };
