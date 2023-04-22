@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 var client;
-async function main() {
+function main() {
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/drivers/node/ for more details
