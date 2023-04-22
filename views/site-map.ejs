@@ -7,7 +7,7 @@
         <meta name="description" content="网站地图">
         <meta name="author" content="@濠梁钓鱼">
 
-        <% include pre-header.ejs %>        
+        <%-include('pre-header.ejs') %>       
         <!-- specific css -->
         <link rel="stylesheet" href="/stylesheets/main.css">
         
@@ -15,7 +15,7 @@
          </style>
     </head>
     <body>
-        <% include ./nav/header-nav.ejs %>
+        <%-include('./nav/header-nav.ejs') %>
         
         <div class="container main_container">
             <div class="row">
@@ -39,11 +39,11 @@
                         <a href="http://sourceforge.net/" class="btn btn-link">Sourceforge</a>
                     </div>
                 </div>
-            <% include ./nav/tupian_xinshang.ejs %>
+            <%- include('./nav/tupian_xinshang.ejs') %>
             </div>
         </div> <!-- /container -->
 
-        <% include footer.ejs %>
-        <% include post-footer.ejs %>
+        <%-include('footer.ejs') %>
+        <%-include('post-footer.ejs') %>
     </body>
 </html>

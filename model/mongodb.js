@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
 
+var client;
 async function main() {
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
@@ -14,7 +15,7 @@ async function main() {
      * pass option { useUnifiedTopology: true } to the MongoClient constructor.
      * const client =  new MongoClient(uri, {useUnifiedTopology: true})
      */
-    const client = new MongoClient(uri);
+    client = new MongoClient(uri);
 
     try {
         // Connect to the MongoDB cluster
@@ -32,4 +33,4 @@ main().catch(console.error);
 
 // Add functions that make DB calls here
 
-exports.db = MongoClient;
+exports.db = client.db('node');
