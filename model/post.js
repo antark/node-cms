@@ -3,6 +3,7 @@
 */
 // var util = require('util');
 var db = require('./mongodb').db;
+var ObjectID = require('mongodb').ObjectId;
 
 function Post(){    // ID 、 标题 、 内容、 用户ID 、 时间 、 标签
     // _id : ID
@@ -22,7 +23,7 @@ Post.prototype.save = async function(post, callback){
     if(!post._id) {
         msg.object = await db.collection('posts').insertOne(post);
     }else{
-        msg.object = await db.collection('posts').updateOne(post);
+        msg.object = await db.collection('posts').findOneAndUpdate({"_id": new ObjectID(post._id)}, post});
     }
     console.log(JSON.stringify(msg));
     callback(msg);
