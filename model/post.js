@@ -32,6 +32,7 @@ Post.prototype.save = async function(post, callback){
 Post.prototype.count = async function(callback){
     var msg = {};
     msg.number = await db.collection('posts').count();
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
 
@@ -45,6 +46,7 @@ Post.prototype.find = async function(condition, callback){
 Post.prototype.findOne = async function(condition, callback){
     var msg = {};
     msg.object = await db.collection('posts').findOne(condition, {comments: {$slice: -5}});
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
 
@@ -57,22 +59,25 @@ Post.prototype.findOnePage = async function(condition, callback){
     if(typeof condition.n != 'undefined') delete condition.n;
     
     msg.objects = await db.collection('posts').find(condition, {content: 0, comments: 0}).sort({time: -1}).skip(nskip).limit(n).toArray();
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
 
-// Post.update ： 更新 post
+// Post.update
 Post.prototype.update = async function(condition, set, callback){
     var msg = {};
     var multi = condition.multi || false;
     if(condition.multi) delete condition.multi;
     
-    msg.number = await db.collection('posts').update(condition, set, {'multi': multi});
+    msg.number = await db.collection('posts').updateOne(condition, set, {'multi': multi});
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
 
-// Post.remove ： 根据条件删 post
+// Post.remove
 Post.prototype.remove = async function(condition, callback){
     var msg = {};
-    await db.collection('posts').remove(condition);
+    await db.collection('posts').delteOne(condition);
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
