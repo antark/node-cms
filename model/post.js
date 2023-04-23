@@ -23,7 +23,8 @@ Post.prototype.save = async function(post, callback){
     if(!post._id) {
         msg.object = await db.collection('posts').insertOne(post);
     }else{
-        msg.object = await db.collection('posts').findOneAndUpdate({"_id": new ObjectID(post._id)}, post});
+        await db.collection('posts').findOneAndReplace({"_id": new ObjectID(post._id)}, post);
+	msg.object = post;
     }
     console.log(JSON.stringify(msg));
     callback(msg);
@@ -78,7 +79,7 @@ Post.prototype.update = async function(condition, set, callback){
 // Post.remove
 Post.prototype.remove = async function(condition, callback){
     var msg = {};
-    await db.collection('posts').delteOne(condition);
+    await db.collection('posts').deleteOne(condition);
     console.log(JSON.stringify(msg));
     callback(msg);
 };

@@ -41,6 +41,6 @@ Tag.prototype.findOnePage = async function(condition, callback){
 // Tag.update ： 更新 tag
 Tag.prototype.update = async function(condition, setter, callback){    //
     var msg = {};
-    msg.objects = db.collection('tags').update(condition, setter, {upsert: true});
+    msg.objects = db.collection('tags').updateOne(condition, setter, {upsert: true});
     callback(msg);
 };
