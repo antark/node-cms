@@ -57,7 +57,7 @@ User.prototype.update = async function(condition, setter, callback){
     var multi = condition.multi || false;
     if(condition.multi) delete condition.multi;
     
-    msg.number = await db.collection('users').update(condition, setter, {'multi': multi});
+    msg.number = await db.collection('users').updateOne(condition, setter, {'multi': multi});
     callback(msg);
 };
 

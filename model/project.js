@@ -40,6 +40,6 @@ Project.prototype.findOnePage = async function(condition, callback){
 // Project.update ： 更新 project
 Project.prototype.update = async function(condition, setter, callback){    //
     var msg = {};
-    msg.objects = await db.collection('projects').update(condition, setter, {upsert: true});
+    msg.objects = await db.collection('projects').updateOne(condition, setter, {upsert: true});
     callback(msg);
 };

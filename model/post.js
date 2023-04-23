@@ -24,7 +24,7 @@ Post.prototype.save = async function(post, callback){
     }else{
         msg.object = await db.collection('posts').updateOne(post);
     }
-
+    console.log(JSON.stringify(msg));
     callback(msg);
 };
 

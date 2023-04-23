@@ -15,7 +15,7 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-var ObjectID = require('mongodb').ObjectID;
+var ObjectID = require('mongodb').ObjectId;
 var User = require('../model/user').User;    // UserDAO
 var Post = require('../model/post').Post;    // PostDAO
 var Image = require('../model/image').Image;    // ImageDAO

@@ -6,7 +6,7 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-var ObjectID = require('mongodb').ObjectID;
+var ObjectID = require('mongodb').ObjectId;
 var User = require('../model/user').User;
 var Post = require('../model/post').Post;
 var Image = require('../model/image').Image;
@@ -117,7 +117,7 @@ exports.map = function(app){
             }else if(msg.object.password != cry.encrypt(user.password)){    // 密码出错
                 ret.error = {type : 'password', info : '输入密码有误 !'};
             }else{    // 登陆成功
-                ret.object = msg.objects;
+                ret.object = msg.object;
                 req.session.user = msg.object;    // 更新 session[''user]
             }
             res.send(ret);
@@ -228,7 +228,7 @@ exports.map = function(app){
             res.send(ret);
             return;
         }
-        
+        console.log(JSON.stringify(req.body)); 
         var userModel = new User();
         var user = {};
         user._id = req.body.user.id ? req.body.user.id : req.session.user._id;    // 获取 ID
