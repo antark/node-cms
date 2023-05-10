@@ -6,7 +6,7 @@
                 <li class="first"><% if(typeof user !== 'undefined' && user != null) { %> <a href="/profile"><i class="fa fa-smile-o fa-fw"></i>+<%= user.name %></a> <%  } else { %><a href="/login"><i class="fa fa-smile-o fa-fw"></i>+you</a><% }%></li>
                 <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
                 
-                <!--  // 删除项目页、标签页、图片页
+                <!--  // 隐藏项目页、标签页、图片页
                 <li><a href="/projects"><i class="fa fa-anchor fa-fw"></i>项目</a></li>
                 <li><a href="/tags"><i class="fa fa-tags fa-fw"></i>标签</a></li>
                 <li><a href="/gallery-wall"><i class="fa fa-picture-o fa-fw"></i>图片墙</a></li> 
@@ -22,9 +22,13 @@
                                 <li><a href="/member"><i class="fa fa-users fa-2x"></i><br>成员</a></li>
                                 <li><a href="/login"><i class="fa fa-key fa-2x"></i><br>登录</a></li>
                                 <li><a href="/logout"><i class="fa fa-sign-out fa-2x"></i><br>退出</a></li>
+
+                                <!-- //  隐藏图片上传、下载、用户注册
                                 <li><a href="/upload"><i class="fa fa-cloud-upload fa-2x"></i><br>上传</a></li>
                                 <li><a href="/download"><i class="fa fa-cloud-download fa-2x"></i><br>下载</a></li>
                                 <li><a href="/sign-up"><i class="fa fa-envelope-o fa-2x"></i><br>注册</a></li>
+                                -->
+
                                 <li><a href="/about"><i class="fa fa-info fa-2x"></i><br>关于</a></li>
                                 <li><a href="/site-map"><i class="fa fa-sitemap fa-2x"></i><br>地图</a></li>
                             </ul>

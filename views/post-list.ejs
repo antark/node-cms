@@ -18,7 +18,7 @@
         
         <div class="container main_container posts">
             <div class="row">
-            <div class="col-md-8 posts_list">
+            <div class="col-md-12 posts_list">
             <ol>
             <% if(typeof posts !==  'undefined' && posts != null){ %>
             <% for(var i = 0; i < posts.length; ++i){ %>
@@ -36,7 +36,6 @@
             <% }//if %>
             </ol>
             </div>
-            <%- include('./nav/tupian_xinshang.ejs') %>
             </div><!-- row -->
         </div>
 <script>
