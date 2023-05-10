@@ -18,7 +18,7 @@
         <%-include('./nav/header-nav.ejs') %>
         <div class="container main_container post_edit">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
             <form class="form-horizontal" method="POST" action="#" id="post_form">
                 <div class="form-group col-md-offset-2" class="for_warn_message">
                     <label class="" id="warn_message">
@@ -37,16 +37,14 @@
                     <textarea id="input_content" name="content" placeholder="尽情地写..."></textarea>
                 </div>
                 <div class="form-group tag">
-                    <label class="control-label" for="input_project">项目：</label>
+                    <label class="control-label" for="input_project">分类：</label>
                     <select id="input_project">
-                        <option>nodejs</option><option>golang</option><option>python</option>
-                        <option>c</option><option>c++</option><option value="c-sharp">c#</option>
-                        <option>objective-c</option><option>java</option>
+                        <option>个人随笔</option><option>teck分享</option>
                     </select>
                 </div>
                 <div class="form-group tag">
                     <label class="control-label" for="input_tags">标签：</label>
-                    <div contenteditable="true" id="input_tags" name="tags"><span>javascript</span></div>
+                    <div contenteditable="true" id="input_tags" name="tags"><span></span></div>
                 </div>
                 
                 <div class="form-group submit">
@@ -57,7 +55,6 @@
                 </div>
             </form>
             </div><!-- -->
-            <%- include('./nav/tupian_xinshang.ejs') %>
         </div><!-- row -->
         </div> <!-- /container -->
 
