@@ -5,9 +5,13 @@
             <ul class="nav nav-tabs nav_header">
                 <li class="first"><% if(typeof user !== 'undefined' && user != null) { %> <a href="/profile"><i class="fa fa-smile-o fa-fw"></i>+<%= user.name %></a> <%  } else { %><a href="/login"><i class="fa fa-smile-o fa-fw"></i>+you</a><% }%></li>
                 <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+                
+                <!--  // 删除项目页、标签页、图片页
                 <li><a href="/projects"><i class="fa fa-anchor fa-fw"></i>项目</a></li>
                 <li><a href="/tags"><i class="fa fa-tags fa-fw"></i>标签</a></li>
                 <li><a href="/gallery-wall"><i class="fa fa-picture-o fa-fw"></i>图片墙</a></li> 
+                -->
+
                 <li><a href="/post-edit"><i class="fa fa-pencil fa-fw"></i>写作</a></li>
                 <li class="header_panel" style=""><a href="#" class="nav_header_panel">&ensp;</a>
                     <div class="popover bottom">

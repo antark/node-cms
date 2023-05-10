@@ -28,12 +28,12 @@ exports.map = function(app){
     
     // 主页
     app.get('/', function (req, res){
-        res.render('index', { title: '主页- Doc4Doc - 文档的文档', user: req.session.user, ntabs: true});    //
+        res.render('index', { title: '主页 - 文琼', user: req.session.user, ntabs: true});    //
     });
     
     // 错误页面
     app.get('/error-404', function (req, res){
-        res.render('error-4xx', { title: 'error 404 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('error-4xx', { title: 'error 404 - 文琼', user: req.session.user});
     });
     
     
@@ -115,7 +115,7 @@ exports.map = function(app){
     app.get('/projects', function (req, res){
 	var projectModel = new Project();
         projectModel.findOnePage({}, function(msg){
-            res.render('projects', { title: '所有项目 - Doc4Doc - 文档的文档', user: req.session.user, projects: msg.objects, ntabs: true});
+            res.render('projects', { title: '所有项目 - 文琼', user: req.session.user, projects: msg.objects, ntabs: true});
         });
     });
     
@@ -123,7 +123,7 @@ exports.map = function(app){
     app.get('/tags', function (req, res){
         var tagModel = new Tag();
         tagModel.findOnePage({}, function(msg){
-            res.render('tags', { title: '所有标签 - Doc4Doc - 文档的文档', user: req.session.user, tags: msg.objects, ntabs: true});
+            res.render('tags', { title: '所有标签 - 文琼', user: req.session.user, tags: msg.objects, ntabs: true});
         });
     });
     
@@ -132,7 +132,7 @@ exports.map = function(app){
         var project = req.params.project;    // 获取标签
         var postModel = new Post();
         postModel.findOnePage({'project': project}, function(msg){
-            res.render('post-list', { title: project+ ' - Doc4Doc - 文档的文档', user: req.session.user, posts: msg.objects, ntabs: true, 'project': project});
+            res.render('post-list', { title: project+ ' - 文琼', user: req.session.user, posts: msg.objects, ntabs: true, 'project': project});
         });
     });
     
@@ -141,14 +141,14 @@ exports.map = function(app){
         var tag = req.params.tag;    // 获取标签
         var postModel = new Post();
         postModel.findOnePage({tags: {$all: [tag]}}, function(msg){
-            res.render('post-list', { title: tag+ ' - Doc4Doc - 文档的文档', user: req.session.user, posts: msg.objects, ntabs: true, 'tag': tag});
+            res.render('post-list', { title: tag+ ' - 文琼', user: req.session.user, posts: msg.objects, ntabs: true, 'tag': tag});
         });
     });
     
     
     // 搜索页面
     app.get('/search', function (req, res){
-        res.render('search', { title: '搜索页面- Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('search', { title: '搜索页面- 文琼', user: req.session.user});
     });
     
     // 成员页面
@@ -159,7 +159,7 @@ exports.map = function(app){
         
         postModel.count(function(msg){    // 获取文章数目
             if(msg.error){
-                res.render('member', {'title': '功勋元老 - Doc4Doc - 文档的文档' , 'user': req.session.user});
+                res.render('member', {'title': '功勋元老 - 文琼' , 'user': req.session.user});
                 return;
             }
             var n_posts = msg.number;
@@ -172,9 +172,9 @@ exports.map = function(app){
             
             userModel.findOnePage({'nskip': nskip, 'n': page_count}, function(msg){    // 获取用户总数、以及某一指定分页的用户
                 if(msg.error){
-                    res.render('member', {'title': '成员 - Doc4Doc - 文档的文档' , 'user': req.session.user});
+                    res.render('member', {'title': '成员 - 文琼' , 'user': req.session.user});
                 }else{
-                    res.render('member', {'title': '成员 - Doc4Doc - 文档的文档' , 'user': req.session.user, 'members': msg.objects, 
+                    res.render('member', {'title': '成员 - 文琼' , 'user': req.session.user, 'members': msg.objects, 
                         'n_all': msg.number, 'cur_page': page, 'n_per_page': page_count, 'n_posts': n_posts});
                 }
             });
@@ -184,7 +184,7 @@ exports.map = function(app){
 
     // 站点地图
     app.get('/site-map', function (req, res){
-        res.render('site-map', { title: '站点地图 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('site-map', { title: '站点地图 - 文琼', user: req.session.user});
     });
     
     // 下载页面
@@ -212,13 +212,13 @@ exports.map = function(app){
                 msg.files.push(file);
             }
             //res.send(msg.files);
-            res.render('download', {title: '下载 - Doc4Doc - 文档的文档', user: req.session.user, 'files': msg.files});
+            res.render('download', {title: '下载 - 文琼', user: req.session.user, 'files': msg.files});
         });
     });
     
     // 上传页面
     app.get('/upload', function (req, res){
-        res.render('upload', { title: '上传图片和文件 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('upload', { title: '上传图片和文件 - 文琼', user: req.session.user});
     });
     
     // 图片文件上传
@@ -326,7 +326,7 @@ exports.map = function(app){
     
     // 关于页面
     app.get('/about', function (req, res){
-        res.render('about', { title: '关于我们 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('about', { title: '关于我们 - 文琼', user: req.session.user});
     });
     
     // 注销
@@ -337,12 +337,12 @@ exports.map = function(app){
     
     // 登陆页面
     app.get('/login', function (req, res){
-        res.render('login', {title: '登陆页面 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('login', {title: '登陆页面 - 文琼', user: req.session.user});
     });
     
     // 注册页面
     app.get('/sign-up', function (req, res){
-        res.render('sign-up', {title: '注册页面 - Doc4Doc - 文档的文档', user: req.session.user});
+        res.render('sign-up', {title: '注册页面 - 文琼', user: req.session.user});
     });
     
     
@@ -350,7 +350,7 @@ exports.map = function(app){
     app.get('/posts-all', function (req, res){
         var post = new Post();
         post.findOnePage({}, function(msg){
-            res.render('post', { title: '所有短文 - Doc4Doc - 文档的文档', user: req.session.user, posts: msg.objects, ntabs: true});
+            res.render('post', { title: '所有短文 - 文琼', user: req.session.user, posts: msg.objects, ntabs: true});
         });
     });
     
@@ -383,7 +383,7 @@ exports.map = function(app){
         }
         var postModel = new Post();
         postModel.findOnePage({user_id: req.session.user._id}, function(msg){
-            res.render('post', { title: '所有短文 - Doc4Doc - 文档的文档', user: req.session.user, posts: msg.objects, other: req.session.user});
+            res.render('post', { title: '所有短文 - 文琼', user: req.session.user, posts: msg.objects, other: req.session.user});
         });
     });
     
@@ -394,14 +394,14 @@ exports.map = function(app){
         
         userModel.findOne({'name': 'admin'}, function(msg){
             if(msg.error || !msg.object){
-                res.render('index', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, ntabs: true});    //
+                res.render('index', { title: '图片墙 - 文琼', user: req.session.user, ntabs: true});    //
             }else{
                 admin = msg.object;    // admin 账号
                 imageModel.findOnePage({'user_id': admin._id.toString()}, function(msg){
                     if(msg.error){
-                        res.render('gallery', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, ntabs: true, 'other': null});    //
+                        res.render('gallery', { title: '图片墙 - 文琼', user: req.session.user, ntabs: true, 'other': null});    //
                     }else{
-                        res.render('gallery', { title: '图片墙 - Doc4Doc - 文档的文档', user: req.session.user, gallery: msg.objects, ntabs: true, 'other': admin});    //
+                        res.render('gallery', { title: '图片墙 - 文琼', user: req.session.user, gallery: msg.objects, ntabs: true, 'other': admin});    //
                     }
                 });
             }
@@ -416,7 +416,7 @@ exports.map = function(app){
         }
         var imageModel = new Image();
         imageModel.findOnePage({'user_id': req.session.user._id.toString()}, function(msg){
-            res.render('gallery', { title: ''+req.session.user.name+'的相册 - Doc4Doc - 文档的文档', 'user': req.session.user, gallery: msg.objects, 'other': req.session.user});
+            res.render('gallery', { title: ''+req.session.user.name+'的相册 - 文琼', 'user': req.session.user, gallery: msg.objects, 'other': req.session.user});
         });
     });
     
@@ -428,7 +428,7 @@ exports.map = function(app){
         }
         var docModel = new Doc();
         docModel.findOnePage({'user_id': req.session.user._id.toString()}, function(msg){
-            res.render('file', { title: req.session.user.name+'的文件 - Doc4Doc - 文档的文档', 'user': req.session.user, files: msg.objects, 'other': req.session.user});
+            res.render('file', { title: req.session.user.name+'的文件 - 文琼', 'user': req.session.user, files: msg.objects, 'other': req.session.user});
         });
     });
     
@@ -437,7 +437,7 @@ exports.map = function(app){
         var post_id = req.query.post_id;
 
         if(!req.session.user || !post_id){    // 么有登陆， 或没有 post_id 参数
-            res.render('post-edit', {title: '写点东西 - Doc4Doc - 文档的文档', user: req.session.user, no_post: true});
+            res.render('post-edit', {title: '写点东西 - 文琼', user: req.session.user, no_post: true});
             return;
         }
         var postModel = new Post();
@@ -445,10 +445,10 @@ exports.map = function(app){
             if(msg.error || !msg.object){    // 查询出错
                 res.render('post-edit', { title: '写点东西', user: req.session.user});
             }else if(req.session.user.name != 'admin' && msg.object.user_id != req.session.user._id.toString()){   // post 非该用户所写， 管理员账号除外
-                res.render('post-edit', { title: '写点东西 - Doc4Doc - 文档的文档', user: req.session.user});
+                res.render('post-edit', { title: '写点东西 - 文琼', user: req.session.user});
             }else{   // 可以编辑， post 发过去
                 post = msg.object;
-                res.render('post-edit', { title: '写点东西 - Doc4Doc - 文档的文档', "post": post, user: req.session.user});
+                res.render('post-edit', { title: '写点东西 - 文琼', "post": post, user: req.session.user});
             }
         });
     });
@@ -463,10 +463,10 @@ exports.map = function(app){
         var postModel = new Post();
         postModel.findOne({"_id": new ObjectID(post_id)}, function(msg){
             if(msg.error || !msg.object){    // 查询出错
-                res.render('/post-show', { title: '单个 post 页面 - Doc4Doc - 文档的文档', user: req.session.user});
+                res.render('/post-show', { title: '单个 post 页面 - 文琼', user: req.session.user});
             }else{    // 
                 post = msg.object;
-                res.render('post-show', { title: '单个 post 页面 - Doc4Doc - 文档的文档', "post": post, user: req.session.user});
+                res.render('post-show', { title: '单个 post 页面 - 文琼', "post": post, user: req.session.user});
             }
         });
     });
@@ -482,10 +482,10 @@ exports.map = function(app){
         postModel.findOne({"_id": new ObjectID(post_id)}, function(msg){
             console.log(JSON.stringify(msg));
             if(msg.error || !msg.object){    // 查询出错
-                res.render('post-show', {title: '单个 post 页面 - Doc4Doc - 文档的文档', user: req.session.user, post: null});
+                res.render('post-show', {title: '单个 post 页面 - 文琼', user: req.session.user, post: null});
             }else{    // 
                 post = msg.object;
-                res.render('post-show', {title: '单个 post 页面 - Doc4Doc - 文档的文档', "post": post, user: req.session.user});
+                res.render('post-show', {title: '单个 post 页面 - 文琼', "post": post, user: req.session.user});
             }
         });
     });
