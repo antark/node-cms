@@ -171,14 +171,12 @@ exports.map = function(app){
                 ret.error = {info: '写入数据库失败'};
             }else{    // post 成功 save
                 ret.object = msg.object;
-                console.log(JSON.stringify(msg.object));                
                 var projectModel = new Project();
                 projectModel.update({name: msg.object.project}, {$set: {name: msg.object.project}}, function(msg){    // 更新项目集
                     if(msg.error){
                         console.log('error: '+ msg.error);
                     }
                 });
-		console.log(JSON.stringify(msg.object.tags));
                 var tagModel = new Tag();
                 msg.object.tags.forEach(function(tag){    // 更新标签集
                     tagModel.update({name: tag}, {$set: {name: tag}}, function(msg){    // 更新项目集
