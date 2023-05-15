@@ -300,7 +300,7 @@ article p:first-child:first-letter{
   margin: 5px 0;
 }
 .posts .posts_content{
-  margin: 15px 0;
+  margin: 10px 0;
 }
 .posts .posts_meta{
   margin: 10px 0;
@@ -311,7 +311,9 @@ article p:first-child:first-letter{
   font-weight: bold;
 }
 .posts .posts_content ol, .posts .posts_content ul{
-  margin: 15px 0;
+  margin: 10px 0;
+  margin-left: 2em;
+  line-height: 2.3em;
 }
 /**************** 上传文件 upload 部分 *****************/
 .upload_div input{
