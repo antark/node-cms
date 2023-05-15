@@ -21,7 +21,9 @@ exports.Post = Post;
 Post.prototype.save = async function(post, callback){
     var msg = {};
     if(!post._id) {
-        msg.object = await db.collection('posts').insertOne(post);
+        let object = await db.collection('posts').insertOne(post);
+        post._id = object.insertedId;
+	msg.object = post;
     }else{
         await db.collection('posts').findOneAndReplace({"_id": new ObjectID(post._id)}, post);
 	msg.object = post;

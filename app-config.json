@@ -2,7 +2,7 @@
     "server": {
         "server_description" : "文琼的个人站点",
         "server_name" : "antakr",
-        "server_port" : 443
+        "server_port" : 80
     },
     "bae": true,
     "database_local": {

@@ -3,8 +3,8 @@
  */
 
 var express = require('express');
-// var http = require('http');
-var https = require('https');
+var http = require('http');
+//var https = require('https');
 var path = require('path');
 var fs = require('fs');
 var logger = require('morgan');
@@ -61,13 +61,14 @@ router.map(app);
 
 // ====================  ´´½¨ http ·þÎñÆ÷  ====================
 
-//http.createServer(app).listen(app.get('port'), function(){
-  //  console.log('doc4doc app server listening on port ' + app.get('port'));
-//});
+http.createServer(app).listen(app.get('port'), function(){
+    console.log('doc4doc app server listening on port ' + app.get('port'));
+});
 
 
 // ====================  ´´½¨ https ·þÎñÆ÷  ====================
 
+/*
 var options = {
   key: fs.readFileSync('./cert/private.key'),
   cert: fs.readFileSync('./cert/certificate.crt')
@@ -77,4 +78,11 @@ https.createServer(options, app).listen(app.get('port'), function(){
   console.log('antark server listening on port ' + app.get('port'));
 });
 
+app.use((req, res, next) => {
+    if (req.protocol === 'http') {
+        return res.redirect(301, `https://${req.headers.host}${req.url}`);
+    }
 
+    next();
+});
+*/

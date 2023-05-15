@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group tag">
                     <label class="control-label" for="input_tags">标签：</label>
-                    <div contenteditable="true" id="input_tags" name="tags"><span></span></div>
+                    <div contenteditable="true" id="input_tags" name="tags">这里写标签,空格分隔</div>
                 </div>
                 
                 <div class="form-group submit">
@@ -85,7 +85,7 @@ $(document).ready(function(){
         var summary = $("#input_summary").val().trim();
         var content = $("#input_content").code().trim();
         var input_pro = $("#input_project").val();
-        var input_tags = $("#input_tags span").text();
+        var input_tags = $("#input_tags").text();
         
         var tags = input_tags.split(" ");
         // alert(input_pro + "\n" + tags);
