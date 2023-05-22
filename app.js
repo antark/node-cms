@@ -78,6 +78,7 @@ https.createServer(options, app).listen(app.get('port'), function(){
   console.log('antark server listening on port ' + app.get('port'));
 });
 
+
 app.use((req, res, next) => {
     if (req.protocol === 'http') {
         return res.redirect(301, `https://${req.headers.host}${req.url}`);
@@ -86,3 +87,4 @@ app.use((req, res, next) => {
     next();
 });
 */
+

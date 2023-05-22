@@ -14,7 +14,7 @@
 body{
   background: url(/images/blueprint-dark.png) repeat;
   background-color: rgba(184, 172, 81, 0.1);
-  font-size: 12px;
+  font-size: 13px;
   -webkit-text-stroke: 1px rgba(0,0,0,0.1);
   text-shadow: #000 0px 0px 0px;
   /*font-family: 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;*/

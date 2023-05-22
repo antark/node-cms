@@ -51,7 +51,7 @@
                     <h2>评论：</h2>
                     <% if(typeof post != 'undefined' && post && post.comments){
                         for(var ii = 0; ii < post.comments.length; ++ii){ %>
-                        <h3><%= '# '+ii+' 楼：' + (post.comments[ii].user_name || '未知' ) %></h3><p><%= post.comments[ii].text %></p>
+			<h3><%= '# '+ii+' 楼：' + (post.comments[ii].user_name || '未知' ) %></h3><p><%= post.comments[ii].text %></p>
                         <%}
                     }%>
                     <h2>发表评论：</h2>
