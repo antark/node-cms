@@ -154,7 +154,7 @@ exports.map = function(app){
         
         var post = {_id: req.body.post._id || null, title: req.body.post.title, summary: req.body.post.summary, content: req.body.post.content, 
                 user_id: req.body.post.user_id, user_name: req.body.post.user_name,
-                time: new Date(), project: req.body.post.project, tags: req.body.post.tags
+                last_time: new Date(), project: req.body.post.project, tags: req.body.post.tags
             };
         var postModel = new Post();
         

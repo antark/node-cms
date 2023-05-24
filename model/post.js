@@ -12,6 +12,7 @@ function Post(){    // ID 、 标题 、 内容、 用户ID 、 时间 、 标签
     // user_id : 用户 ID 
     // user_name : 用户名
     // time : 发表时间
+    // last_time : last modifed time
     // tags : 标签 (数组)
 }
 
@@ -21,12 +22,13 @@ exports.Post = Post;
 Post.prototype.save = async function(post, callback){
     var msg = {};
     if(!post._id) {
+        post.time = post.last_time;
         let object = await db.collection('posts').insertOne(post);
         post._id = object.insertedId;
-	msg.object = post;
+	    msg.object = post;
     }else{
-        await db.collection('posts').findOneAndReplace({"_id": new ObjectID(post._id)}, post);
-	msg.object = post;
+        await db.collection('posts').updateOne({"_id": new ObjectID(post._id)}, {$set: post});
+	    msg.object = post;
     }
     console.log(JSON.stringify(msg));
     callback(msg);
