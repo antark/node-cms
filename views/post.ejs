@@ -53,11 +53,12 @@
                         time = posts[i].time;
                         year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
                         post_time = year + '/' + mon + '/' + day;
+
                     %>
                     
                     </div>
                     <div class="posts_content">
-                        <div class="posts_meta">作者： <a href="<%= posts[i].user_name ? '/+'+posts[i].user_name : '#' %>"><%= posts[i].user_name || '未知' %></a> 创建时间： <%= post_time %></div>
+                        <div class="posts_meta">作者: <a href="<%= posts[i].user_name ? '/+'+posts[i].user_name : '#' %>"><%= posts[i].user_name || '未知' %></a> 创建时间: <%= post_time %></div>
                         <p><%- posts[i].summary %>
                     </div>
                     </li>
@@ -84,7 +85,7 @@ function wookmark_post()
         autoResize: "true",
         align: "left",
         direction: "left",
-        itemWidth: "80%",
+        itemWidth: "100%",
         offset: 50,
         container: $("#notes_list"),
         flexibleWidth: 1,
