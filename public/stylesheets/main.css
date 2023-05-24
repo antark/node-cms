@@ -136,7 +136,7 @@ input{
   left: 0;
 }
 #notes_list li{
-  list-style: none;
+  /*list-style: none;*/
 }
 .gallery #notes_list li{
   border: 1px solid #eee;
