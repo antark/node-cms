@@ -305,7 +305,7 @@ article p:first-child:first-letter{
 }
 .posts .posts_meta{
     color: gray;
-    font-size: 10px;
+    font-size: 8px;
     display: inline-block;
     margin-left: 10px;
 }
@@ -523,7 +523,7 @@ a.nav_header_panel:hover, a.nav_header_panel:focus{
 /***************** posts ************/
 .posts_title h3{
   display: inline-block;
-  font-size: 1.1em;
+  font-size: 1.3em;
 }
 .posts .posts_operation{
   float: right;
