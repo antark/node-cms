@@ -43,6 +43,13 @@
                             onmouseout="$(this).children(':first-child').next().css('visibility', 'hidden');return false;"
                         <% } %>
                     >
+
+                    <% 
+                        time = posts[i].time;
+                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
+                        post_time = year + '/' + mon + '/' + day;
+
+                    %>
                         <h3 class="mark_first_letter">
                             <a href="/post-show/id/<%= posts[i]._id %>"><%= posts[i].title %></a>
                             <div class="posts_meta">作者: <a href="<%= posts[i].user_name ? '/+'+posts[i].user_name : '#' %>"><%= posts[i].user_name || '未知' %></a> 时间: <%= post_time %></div>
@@ -52,12 +59,7 @@
                             <a href="/post-edit?post_id=<%= posts[i]._id %>" target="_blank" class="btn btn-link btn-xs"><i class="fa fa-pencil fa-lg"></i></a>
                         </div>
                         <hr>
-                    <% 
-                        time = posts[i].time;
-                        year = time.getFullYear(); mon = time.getMonth()+1; day = time.getDate();
-                        post_time = year + '/' + mon + '/' + day;
 
-                    %>
                     
                     </div>
                     <div class="posts_content">
