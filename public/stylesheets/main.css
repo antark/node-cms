@@ -51,7 +51,8 @@ footer p{
   text-indent: 0;
 }
 
-.mark_first_letter:first-letter{
+/*.mark_first_letter:first-letter{*/
+.mark_first_letter {
   font-size: 1.7em;
   text-transform: uppercase;
 }
@@ -303,7 +304,10 @@ article p:first-child:first-letter{
   margin: 10px 0;
 }
 .posts .posts_meta{
-  margin: 10px 0;
+    color: gray;
+    font-size: 10px;
+    display: inline-block;
+    margin-left: 10px;
 }
 .posts h2{
   font-size: 1.1em;
