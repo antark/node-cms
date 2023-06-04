@@ -22,13 +22,20 @@ var Image = require('../model/image').Image;    // ImageDAO
 var Doc = require('../model/doc').Doc;    // DocDAO
 var Project = require('../model/project').Project;    // ProjectDAO
 var Tag = require('../model/tag').Tag;    // TagDAO
+var PageView = require('../model/pageview').PageView; // PageViewDAO
 
 exports.map = function(app){
     var admin = null;    // 管理员账号
     
     // 主页
-    app.get('/', function (req, res){
-        res.render('index', { title: '主页 - 文琼', user: req.session.user, ntabs: true});    //
+    app.get('/', async function (req, res){
+	var pageView = new PageView();
+	await pageView.addOnePv("/");
+
+	var pv = await pageView.totalPv();
+	console.log("totalPv: " + pv);
+	
+        res.render('index', { title: '主页 - 文琼', user: req.session.user, ntabs: true, pv: pv});    //
     });
     
     // 错误页面
@@ -347,8 +354,11 @@ exports.map = function(app){
     
     
     // 文章页面
-    app.get('/posts-all', function (req, res){
-        var post = new Post();
+    app.get('/posts-all', async function (req, res){
+        var pageView = new PageView();
+        await pageView.addOnePv("/posts-all");
+
+	var post = new Post();
         post.findOnePage({}, function(msg){
             res.render('post', { title: '所有短文 - 文琼', user: req.session.user, posts: msg.objects, ntabs: true});
         });
@@ -376,11 +386,15 @@ exports.map = function(app){
     
     
     // 个人文章页面
-    app.get('/posts', function (req, res){
+    app.get('/posts', async function (req, res){
         if(!req.session.user){
             res.redirect('/login');
             return;
         }
+	
+	var pageView = new PageView();
+        await pageView.addOnePv("/posts");
+
         var postModel = new Post();
         postModel.findOnePage({user_id: req.session.user._id}, function(msg){
             res.render('post', { title: '所有短文 - 文琼', user: req.session.user, posts: msg.objects, other: req.session.user});
@@ -454,12 +468,16 @@ exports.map = function(app){
     });
     
     // 查看单个 post
-    app.get('/post-show', function (req, res){
+    app.get('/post-show', async function (req, res){
         var post_id = req.query.post_id;
         if(!post_id){    // 没有 post_id 参数
             res.redirect('/');
             return;
         }
+
+	var pageView = new PageView();
+        await pageView.addOnePv("/posts-show");
+
         var postModel = new Post();
         postModel.findOne({"_id": new ObjectID(post_id)}, function(msg){
             if(msg.error || !msg.object){    // 查询出错
@@ -471,13 +489,17 @@ exports.map = function(app){
         });
     });
     
-    app.get('/post-show/id/:_id', function (req, res){    //
+    app.get('/post-show/id/:_id', async function (req, res){    //
         var post_id = req.params._id;
         // console.log(JSON.stringify(req.params));
         if(!post_id){    // 没有 post_id 参数
             res.redirect('/');
             return;
         }
+
+	var pageView = new PageView();
+        await pageView.addOnePv("/posts-show/id/"+post_id);
+
         var postModel = new Post();
         postModel.findOne({"_id": new ObjectID(post_id)}, function(msg){
             console.log(JSON.stringify(msg));

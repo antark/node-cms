@@ -1,9 +1,12 @@
 <footer class="footer footer_thanks">
     <div class="container">
         <p>Copyright ©  2013 - 2023 本站点由 &ensp;<a href="http://www.lrj.name" title="ilovers">文琼</a> ( <i class="fa fa-pencil"></i> ) &ensp;设计并实现 </p>
-        <p>本站点的所有代码使用 <a href="http://opensource.org/licenses/mit-license.html">MIT 许可证</a> ， 文档使用 <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0 许可证</a> 发布</p>
-        <p>非常感谢开源世界提供的众多优秀项目： <a href="http://nodejs.org/">Node</a> 、 <a href="http://expressjs.com/">Express</a> 、<a href="http://www.mongodb.org/">MongoDB</a> 、<a href="http://jquery.com/"> jQuery</a> 、 <a href="http://getbootstrap.com/">Bootstrap</a> 、 <a href="http://fontawesome.io/">Font Awesome</a> <a href="#">...</a></p>
-        <p><a href="https://github.com/antark/doc4doc">GitHub 项目</a> &sdot; <a href="#">发布版本 0.0.1</a></p>
+        <p>
+		<a href="https://github.com/antark/doc4doc">GitHub 项目</a>
+		<% if(typeof pv != 'undefined'){  %>
+			&sdot; <small>当前站点浏览过客有 <%- pv %> 位</p>
+		<% } %>	
+	</p>
     </div>
 </footer>
 <ul class="nav_page">
