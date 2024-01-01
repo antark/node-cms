@@ -18,6 +18,8 @@
         <%-include('./nav/header-nav.ejs') %>
         
         <div class="container posts">
+	<div class="row">  
+	<div class="col-md-8">
             <div class="row article">
             <% if(typeof post !==  'undefined' && post != null){ %>
                     <div class="posts_title" 
@@ -68,6 +70,8 @@
                 <p>你找的文章不存在 !</p>
             <% } %>
             </div>
+	</div>
+	<%-include('./nav/shopping.ejs') %>
         </div>
 <script>
     var post = <%- JSON.stringify(post) %>;
