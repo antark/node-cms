@@ -740,3 +740,14 @@ form#logout{
   padding: 30px 0;
   margin-top: 70px;
 }
+
+/*************** shopping *********************/
+.shopping {
+	margin-top: 20px;
+}
+.shopping img{
+	width: 150px;
+}
+
+
+
