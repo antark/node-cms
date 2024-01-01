@@ -743,11 +743,11 @@ form#logout{
 
 /*************** shopping *********************/
 .shopping {
-	margin-top: 20px;
+	margin-top: 30px;
 }
 .shopping img{
 	width: 150px;
-	padding: 15px;
+	padding: 15px 10px 0 0;
 }
 
 
