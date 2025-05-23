@@ -5,20 +5,20 @@
 var db = require('./mongodb').db;
 var ObjectID = require('mongodb').ObjectId;
 
-function Post(){    // ID ¡¢ ±êÌâ ¡¢ ÄÚÈİ¡¢ ÓÃ»§ID ¡¢ Ê±¼ä ¡¢ ±êÇ©
+function Post(){    // ID ã€ æ ‡é¢˜ ã€ å†…å®¹ã€ ç”¨æˆ·ID ã€ æ—¶é—´ ã€ æ ‡ç­¾
     // _id : ID
-    // title : ±êÌâ
-    // content : ÄÚÈİ
-    // user_id : ÓÃ»§ ID 
-    // user_name : ÓÃ»§Ãû
-    // time : ·¢±íÊ±¼ä
+    // title : æ ‡é¢˜
+    // content : å†…å®¹
+    // user_id : ç”¨æˆ· ID 
+    // user_name : ç”¨æˆ·å
+    // time : å‘è¡¨æ—¶é—´
     // last_time : last modifed time
-    // tags : ±êÇ© (Êı×é)
+    // tags : æ ‡ç­¾ (æ•°ç»„)
 }
 
 exports.Post = Post;
 
-// Post.save £º ±£´æÒ»¸ö doc £¬ ¿ÉÒÔÊÇ insert »òÊÇ update 
+// Post.save ï¼š ä¿å­˜ä¸€ä¸ª doc ï¼Œ å¯ä»¥æ˜¯ insert æˆ–æ˜¯ update 
 Post.prototype.save = async function(post, callback){
     var msg = {};
     if(!post._id) {
@@ -34,7 +34,7 @@ Post.prototype.save = async function(post, callback){
     callback(msg);
 };
 
-// Post.count £º ËÑË÷ post µÄ×ÜÊıÄ¿
+// Post.count ï¼š æœç´¢ post çš„æ€»æ•°ç›®
 Post.prototype.count = async function(callback){
     var msg = {};
     msg.number = await db.collection('posts').count();
@@ -56,10 +56,10 @@ Post.prototype.findOne = async function(condition, callback){
     callback(msg);
 };
 
-// Post.findOnePage £º Í¨¹ıÌõ¼ş²é post
+// Post.findOnePage ï¼š é€šè¿‡æ¡ä»¶æŸ¥ post
 Post.prototype.findOnePage = async function(condition, callback){
     var msg = {};
-    var nskip = +condition.nskip || 0, n = +condition.n || 15;
+    var nskip = +condition.nskip || 0, n = +condition.n || 10;
     
     if(typeof condition.nskip != 'undefined') delete condition.nskip;
     if(typeof condition.n != 'undefined') delete condition.n;
